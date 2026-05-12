@@ -141,6 +141,12 @@
       max-height: min(78vh, 780px);
     }
 
+    .project-card-shell {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
     .portfolio-light .preview-shell {
       border-color: rgba(25,28,33,0.08) !important;
       background: rgba(255,255,255,0.7);
@@ -749,7 +755,7 @@
 
       <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
 
-        <article class="anim-element light-card text-left group neu-cut-md border backdrop-blur-md p-6 md:p-7 transition-all duration-300 hover:-translate-y-1 md:col-span-2 xl:col-span-3" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" data-title="AbWork | Real-Time Fitness &amp; Health Intelligence System">
+        <article class="anim-element light-card text-left group neu-cut-md border backdrop-blur-md p-6 md:p-7 transition-all duration-300 hover:-translate-y-1 md:col-span-2 xl:col-span-3" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" data-title="AbWork | Real-Time Fitness &amp; Health Intelligence System" data-github="https://github.com/AbinanJeya">
           <div class="grid grid-cols-1 lg:grid-cols-[1fr_24rem] gap-6 lg:gap-8 items-start">
             <div>
               <div class="flex items-start justify-between gap-5">
@@ -792,6 +798,10 @@
               </div>
 
               <div class="mt-8 flex flex-wrap gap-3">
+                <a href="https://github.com/AbinanJeya" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 neu-cut-md light-glass neu-shadow px-5 py-2.5 text-sm font-normal text-orange-600 hover:text-orange-700 transition-all duration-300">
+                  GitHub
+                  <iconify-icon icon="solar:code-square-linear" class="text-base" stroke-width="1.5"></iconify-icon>
+                </a>
                 <a href="https://abinanj.com/AbWorkSite/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 neu-cut-md bg-[#1c1c1e] px-5 py-2.5 text-sm font-normal text-white text-on-dark hover:bg-black transition-all neu-shadow">
                   View website
                   <iconify-icon icon="solar:arrow-right-up-linear" class="text-base" stroke-width="1.5"></iconify-icon>
@@ -1229,6 +1239,28 @@
       const modalLinks = document.getElementById('modalLinks');
       const modalPreview = document.getElementById('modalPreview');
       const modalPreviewFrame = document.getElementById('modalPreviewFrame');
+      const projectShells = document.querySelectorAll('button.project-card');
+
+      projectShells.forEach(card => {
+        if (card.closest('.project-card-shell')) {
+          return;
+        }
+
+        card.classList.add('w-full');
+        const shell = document.createElement('div');
+        shell.className = 'project-card-shell';
+        card.parentNode.insertBefore(shell, card);
+        shell.appendChild(card);
+
+        const github = document.createElement('a');
+        github.href = card.dataset.github && card.dataset.github !== '#' ? card.dataset.github : 'https://github.com/AbinanJeya';
+        github.target = '_blank';
+        github.rel = 'noopener noreferrer';
+        github.className = 'inline-flex w-max items-center justify-center gap-2 neu-cut-md light-glass neu-shadow px-4 py-2 text-xs font-normal text-orange-600 hover:text-orange-700 transition-all duration-300';
+        github.innerHTML = 'GitHub <iconify-icon icon="solar:code-square-linear" class="text-sm" stroke-width="1.5"></iconify-icon>';
+        shell.appendChild(github);
+      });
+
       const projectCards = document.querySelectorAll('button.project-card');
 
       function openProject(card) {
@@ -1281,7 +1313,7 @@
           github.target = '_blank';
           github.rel = 'noopener noreferrer';
           github.className = 'inline-flex items-center justify-center gap-2 neu-cut-md light-glass px-5 py-2.5 text-sm font-normal text-orange-600 hover:text-orange-700 transition-all neu-shadow';
-          github.innerHTML = 'View source <iconify-icon icon="solar:code-square-linear" class="text-base" stroke-width="1.5"></iconify-icon>';
+          github.innerHTML = 'GitHub <iconify-icon icon="solar:code-square-linear" class="text-base" stroke-width="1.5"></iconify-icon>';
           modalLinks.appendChild(github);
         }
 
