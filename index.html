@@ -745,7 +745,7 @@
 
       <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
 
-        <article role="button" tabindex="0" class="project-card anim-element light-card text-left group cursor-pointer neu-cut-md border backdrop-blur-md p-6 md:p-7 transition-all duration-300 hover:-translate-y-1 md:col-span-2 xl:col-span-3" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" data-title="AbWork - Fitness Coach" data-description="Mobile fitness coach app tracking workouts and nutrition with AI-driven insights and Health Connect integration." data-tech="React Native, Expo, Firebase, Health Connect, OpenAI" data-features="Built a mobile fitness coach using React Native and Expo for workouts and nutrition tracking;Integrated Android Health Connect for automatic steps, calories, and sleep tracking;Added coaching with AI-driven insights and daily missions" data-website="https://abinanj.com/AbWorkSite/" data-preview="abwork-preview/index.html">
+        <article class="anim-element light-card text-left group neu-cut-md border backdrop-blur-md p-6 md:p-7 transition-all duration-300 hover:-translate-y-1 md:col-span-2 xl:col-span-3" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
           <div class="grid grid-cols-1 lg:grid-cols-[1fr_24rem] gap-6 lg:gap-8 items-start">
             <div>
               <div class="flex items-start justify-between gap-5">
@@ -757,9 +757,45 @@
               <h3 class="mt-7 text-xl md:text-2xl font-medium tracking-tight text-white">AbWork - Fitness Coach</h3>
               <p class="mt-3 text-sm md:text-base leading-relaxed text-zinc-400 max-w-2xl">AI-driven workout and nutrition coaching with live mobile preview.</p>
               <p class="mt-5 text-xs font-[JetBrains_Mono] uppercase tracking-[0.2em] text-zinc-500">Featured Project</p>
+
+              <div class="mt-6">
+                <h4 class="text-xs font-semibold tracking-[0.22em] uppercase text-zinc-500 font-[JetBrains_Mono]">Tech Stack</h4>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <span class="skill-pill inline-flex items-center neu-cut-sm border px-3 py-1 text-xs font-medium">React Native</span>
+                  <span class="skill-pill inline-flex items-center neu-cut-sm border px-3 py-1 text-xs font-medium">Expo</span>
+                  <span class="skill-pill inline-flex items-center neu-cut-sm border px-3 py-1 text-xs font-medium">Firebase</span>
+                  <span class="skill-pill inline-flex items-center neu-cut-sm border px-3 py-1 text-xs font-medium">Health Connect</span>
+                  <span class="skill-pill inline-flex items-center neu-cut-sm border px-3 py-1 text-xs font-medium">OpenAI</span>
+                </div>
+              </div>
+
+              <div class="mt-7">
+                <h4 class="text-xs font-semibold tracking-[0.22em] uppercase text-zinc-500 font-[JetBrains_Mono]">Key Features</h4>
+                <ul class="mt-3 space-y-3">
+                  <li class="flex gap-3 text-sm leading-relaxed text-gray-700">
+                    <span class="theme-bullet mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-orange-500"></span>
+                    <span>Built a mobile fitness coach using React Native and Expo for workouts and nutrition tracking.</span>
+                  </li>
+                  <li class="flex gap-3 text-sm leading-relaxed text-gray-700">
+                    <span class="theme-bullet mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-orange-500"></span>
+                    <span>Integrated Android Health Connect for automatic steps, calories, and sleep tracking.</span>
+                  </li>
+                  <li class="flex gap-3 text-sm leading-relaxed text-gray-700">
+                    <span class="theme-bullet mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-orange-500"></span>
+                    <span>Added coaching with AI-driven insights and daily missions.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="mt-8 flex flex-wrap gap-3">
+                <a href="https://abinanj.com/AbWorkSite/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 neu-cut-md bg-[#1c1c1e] px-5 py-2.5 text-sm font-normal text-white text-on-dark hover:bg-black transition-all neu-shadow">
+                  View website
+                  <iconify-icon icon="solar:arrow-right-up-linear" class="text-base" stroke-width="1.5"></iconify-icon>
+                </a>
+              </div>
             </div>
 
-            <details open class="card-live-preview" onclick="event.stopPropagation()">
+            <details open class="card-live-preview">
               <summary class="secondary-action inline-flex cursor-pointer list-none items-center justify-center gap-2 neu-cut-md light-glass px-5 py-2.5 text-sm font-normal text-orange-600 hover:text-orange-700 transition-all neu-shadow">
                 Live app preview
                 <iconify-icon icon="solar:alt-arrow-down-linear" class="text-base" stroke-width="1.5"></iconify-icon>
@@ -1193,7 +1229,7 @@
       const modalLinks = document.getElementById('modalLinks');
       const modalPreview = document.getElementById('modalPreview');
       const modalPreviewFrame = document.getElementById('modalPreviewFrame');
-      const projectCards = document.querySelectorAll('.project-card');
+      const projectCards = document.querySelectorAll('button.project-card');
 
       function openProject(card) {
         modalTitle.textContent = card.dataset.title || 'Project';
@@ -1273,19 +1309,10 @@
 
       projectCards.forEach(card => {
         card.addEventListener('click', () => openProject(card));
-        if (card.tagName !== 'BUTTON') {
-          card.addEventListener('keydown', event => {
-            if (event.key === 'Enter' || event.key === ' ') {
-              event.preventDefault();
-              openProject(card);
-            }
-          });
-        }
       });
 
       document.querySelectorAll('.card-live-preview').forEach(preview => {
         preview.addEventListener('click', event => event.stopPropagation());
-        preview.addEventListener('keydown', event => event.stopPropagation());
       });
 
       closeModal.addEventListener('click', closeProject);
