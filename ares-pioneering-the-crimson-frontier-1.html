@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en" class="antialiased selection:bg-orange-500/30 selection:text-white"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ares | Pioneering the Crimson Frontier</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="bg-[#050201] text-white font-sans overflow-x-hidden min-h-screen flex flex-col relative" style="font-family: 'Inter', sans-serif;">
+
+    <!-- WebGL Mars Background Container -->
+    <div id="canvas-container" class="fixed inset-0 z-0 pointer-events-none"></div>
+
+    <!-- Subtle Diagonal Background Texture -->
+    <div class="fixed inset-0 z-0 pointer-events-none opacity-[0.02]" style="background-image: repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 40px);"></div>
+
+    <!-- Radial Gradient Overlay to enhance Martian atmosphere -->
+    <div class="fixed inset-0 z-0 pointer-events-none" style="background: radial-gradient(circle at 75% 50%, rgba(153, 43, 10, 0.35) 0%, rgba(5, 2, 1, 0.95) 80%);"></div>
+
+    <!-- Main Framed Container -->
+    <div class="relative z-10 w-full max-w-[1600px] mx-auto flex flex-col px-6 md:px-12 lg:px-24 border-x border-white/[0.03]">
+
+        <!-- Header -->
+        <header class="w-full flex items-center justify-between py-6 border-b border-orange-900/30">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-2 text-xl tracking-tight font-normal text-white hover:opacity-80 transition-opacity">
+                <iconify-icon icon="solar:planet-broken" style="color: #ea580c;" width="24" height="24"></iconify-icon>
+                Ares
+            </a>
+
+            <!-- Navigation -->
+            <nav class="hidden md:flex items-center gap-8 text-sm text-white/50">
+                <a href="#" class="hover:text-orange-400 transition-colors">Settlements</a>
+                <a href="#" class="hover:text-orange-400 transition-colors">Topography</a>
+                <a href="#" class="hover:text-orange-400 transition-colors">Rovers</a>
+                <a href="#" class="hover:text-orange-400 transition-colors">Crew</a>
+            </nav>
+
+            <!-- CTA Button -->
+            <button class="relative px-5 py-2.5 text-sm font-normal text-white bg-transparent hover:bg-orange-500/10 transition-colors group">
+                <span class="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-orange-500/40 group-hover:border-orange-500 transition-colors"></span>
+                <span class="absolute top-0 right-0 w-1.5 h-1.5 border-t border-r border-orange-500/40 group-hover:border-orange-500 transition-colors"></span>
+                <span class="absolute bottom-0 left-0 w-1.5 h-1.5 border-b border-l border-orange-500/40 group-hover:border-orange-500 transition-colors"></span>
+                <span class="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-orange-500/40 group-hover:border-orange-500 transition-colors"></span>
+                Initialize Sequence
+            </button>
+        </header>
+
+        <!-- Hero Section -->
+        <main class="flex-grow flex flex-col lg:flex-row items-stretch justify-between w-full py-20 lg:py-32 gap-12">
+
+            <div class="w-full lg:w-1/2 flex flex-col justify-center">
+                <div class="inline-flex items-center gap-2 px-3 py-1 mb-8 rounded-full border border-orange-500/20 bg-orange-500/5 text-xs text-orange-400 font-normal tracking-wide shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] w-max">
+                    <span class="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
+                    Project Genesis Active
+                </div>
+
+                <h1 class="scroll-reveal text-5xl md:text-6xl lg:text-7xl leading-[1.05] mb-8 text-white/95 font-extralight tracking-tight">
+                    Pioneering the Crimson Frontier
+                </h1>
+
+                <p class="text-base md:text-lg text-white/50 max-w-lg mb-12 font-extralight leading-relaxed">
+                    Establish advanced biospheres, extract subterranean resources, and build the foundation for humanity's first lasting settlement on Mars.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-5 items-start sm:items-center">
+                    <button class="px-7 py-3.5 bg-orange-600 text-white text-sm font-normal hover:bg-orange-500 transition-colors shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]">
+                        Enlist Now
+                    </button>
+
+                    <button class="flex items-center gap-2 px-7 py-3.5 text-sm text-white/80 hover:text-white bg-transparent hover:bg-white/5 transition-colors group">
+                        <iconify-icon icon="solar:map-point-broken" class="text-orange-500"></iconify-icon>
+                        Explore Topography
+                    </button>
+                </div>
+            </div>
+
+            <!-- Floating Premium Hero Card -->
+            <div class="w-full lg:w-5/12 reveal-fade flex">
+                <div class="relative flex flex-col justify-between w-full min-h-[320px] lg:min-h-[400px] p-8 rounded-2xl shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]" style="background: radial-gradient(circle at top right, rgba(234, 88, 12, 0.15), transparent 70%), linear-gradient(#0a0504, #0a0504) padding-box, linear-gradient(to bottom, rgba(234, 88, 12, 0.5), rgba(234, 88, 12, 0.05)) border-box; border: 1px solid transparent;">
+
+                    <div class="w-12 h-12 rounded-full bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500 shadow-inner">
+                        <iconify-icon icon="solar:radar-broken" width="24" height="24"></iconify-icon>
+                    </div>
+
+                    <div class="mt-auto">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-2xl font-normal tracking-tight text-white/90">Sector Prime</h3>
+                            <span class="text-xs px-2 py-1 rounded bg-orange-500/10 border border-orange-500/20 text-orange-500 font-mono tracking-wide">SEC-00</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 pt-4 border-t border-white/5">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-white/40 mb-1">Atmosphere</span>
+                                <span class="text-sm text-white/80 font-extralight tracking-tight flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Optimal
+                                </span>
+                            </div>
+                            <div class="flex flex-col pl-4 border-l border-white/10">
+                                <span class="text-xs text-white/40 mb-1">Capacity Limit</span>
+                                <span class="text-sm text-white/80 font-extralight tracking-tight">1,250 Units</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Extraterrestrial Architecture Section -->
+        <section class="w-full py-24 border-t border-orange-900/20">
+            <h2 class="scroll-reveal text-3xl md:text-4xl mb-12 text-white/90 font-extralight tracking-tight text-center">
+                Off-World Infrastructure
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+                <!-- Card 1 -->
+                <div class="reveal-fade flex flex-col rounded-xl p-8 min-h-[280px] shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-transform duration-500" style="background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.04), transparent 70%), linear-gradient(#0a0504, #0a0504) padding-box, linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.02)) border-box; border: 1px solid transparent;">
+
+                    <div class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/60 mb-6">
+                        <iconify-icon icon="solar:arrow-right-up-broken" width="20" height="20"></iconify-icon>
+                    </div>
+
+                    <div class="flex flex-col flex-grow">
+                        <h4 class="text-xl tracking-tight font-normal text-white/90 mb-3">Aquatic Extractors</h4>
+                        <p class="text-sm text-white/40 font-extralight mb-8 flex-grow">Sub-surface water mining operations utilizing radiation-resistant synthetic shielding.</p>
+
+                        <div class="flex items-center justify-between mt-auto pt-5 border-t border-white/5">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-white/80">Dr. K. Vance</span>
+                                <span class="text-xs text-white/40 font-extralight">Chief Engineer</span>
+                            </div>
+                            <div class="w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500">
+                                <iconify-icon icon="solar:user-circle-broken" width="18" height="18"></iconify-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="reveal-fade flex flex-col rounded-xl p-8 min-h-[280px] shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-transform duration-500" style="background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.04), transparent 70%), linear-gradient(#0a0504, #0a0504) padding-box, linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.02)) border-box; border: 1px solid transparent;">
+
+                    <div class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/60 mb-6">
+                        <iconify-icon icon="solar:home-angle-broken" width="20" height="20"></iconify-icon>
+                    </div>
+
+                    <div class="flex flex-col flex-grow">
+                        <h4 class="text-xl tracking-tight font-normal text-white/90 mb-3">Habitation Modules</h4>
+                        <p class="text-sm text-white/40 font-extralight mb-8 flex-grow">Quick-deploy living quarters adapted for the extreme conditions of the Martian equator.</p>
+
+                        <div class="flex items-center justify-between mt-auto pt-5 border-t border-white/5">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-white/80">Cmdr. E. Lin</span>
+                                <span class="text-xs text-white/40 font-extralight">Recon Leader</span>
+                            </div>
+                            <div class="w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500">
+                                <iconify-icon icon="solar:user-circle-broken" width="18" height="18"></iconify-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="reveal-fade flex flex-col rounded-xl p-8 min-h-[280px] shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-transform duration-500" style="background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.04), transparent 70%), linear-gradient(#0a0504, #0a0504) padding-box, linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.02)) border-box; border: 1px solid transparent;">
+
+                    <div class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/60 mb-6">
+                        <iconify-icon icon="solar:double-alt-arrow-up-linear" width="20" height="20"></iconify-icon>
+                    </div>
+
+                    <div class="flex flex-col flex-grow">
+                        <h4 class="text-xl tracking-tight font-normal text-white/90 mb-3">Ares Gateway</h4>
+                        <p class="text-sm text-white/40 font-extralight mb-8 flex-grow">Orbital logistics nexus coordinating all transit between the planetary surface and Earth.</p>
+
+                        <div class="flex items-center justify-between mt-auto pt-5 border-t border-white/5">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-white/80">System Auth</span>
+                                <span class="text-xs text-white/40 font-extralight">AI Overseer</span>
+                            </div>
+                            <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white/60">
+                                <iconify-icon icon="solar:cpu-broken" width="18" height="18"></iconify-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer / Info Section -->
+        <footer class="w-full py-12 flex flex-col lg:flex-row items-start lg:items-end justify-between gap-12 mt-auto border-t border-white/[0.03]">
+
+            <!-- Partners -->
+            <div class="flex flex-col gap-6 w-full lg:w-auto">
+                <p class="text-sm text-white/40 font-extralight">Supported by interplanetary coalitions</p>
+                <div class="flex flex-wrap items-center gap-8 md:gap-12 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 text-white">
+                    <span class="text-lg font-normal tracking-tight">Olympo</span>
+                    <span class="text-lg font-normal tracking-tight flex items-center gap-1"><iconify-icon icon="solar:shield-broken" class="text-orange-500"></iconify-icon> Aegis</span>
+                    <span class="text-xl font-normal tracking-tight lowercase">strata.</span>
+                    <span class="text-lg font-normal tracking-tight italic">Helios</span>
+                </div>
+            </div>
+
+            <!-- Stats Box -->
+            <div class="relative w-full lg:w-auto min-w-[320px] md:min-w-[500px] p-8 rounded-xl shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]" style="background: linear-gradient(rgba(255,255,255,0.02), rgba(255,255,255,0.02)) padding-box, linear-gradient(to bottom, rgba(255,255,255,0.15), rgba(255,255,255,0.01)) border-box; border: 1px solid transparent; backdrop-filter: blur(8px);">
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="flex flex-col gap-2">
+                        <span class="text-3xl font-normal tracking-tight">1.5k</span>
+                        <span class="text-xs text-white/40 leading-relaxed font-extralight">Active specialists</span>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <span class="text-3xl font-normal tracking-tight">22</span>
+                        <span class="text-xs text-white/40 leading-relaxed font-extralight">Active bases</span>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <span class="text-3xl font-normal tracking-tight">96%</span>
+                        <span class="text-xs text-white/40 leading-relaxed font-extralight">Self-sufficiency rate</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // --- GSAP Masked Reveal Animation ---
+            const revealElements = document.querySelectorAll('.scroll-reveal');
+
+            revealElements.forEach(el => {
+                const text = el.innerText;
+                const words = text.split(' ');
+                el.innerHTML = '';
+
+                words.forEach((word) => {
+                    const wordContainer = document.createElement('span');
+                    wordContainer.style.display = 'inline-block';
+                    wordContainer.style.overflow = 'hidden';
+                    wordContainer.style.verticalAlign = 'top';
+                    wordContainer.style.marginRight = '0.25rem';
+                    wordContainer.style.paddingBottom = '0.1rem';
+
+                    const innerSpan = document.createElement('span');
+                    innerSpan.style.display = 'inline-block';
+                    innerSpan.innerText = word;
+
+                    wordContainer.appendChild(innerSpan);
+                    el.appendChild(wordContainer);
+                });
+
+                gsap.fromTo(el.querySelectorAll('span > span'),
+                    { y: '120%', rotation: 4, transformOrigin: "0% 100%" },
+                    {
+                        y: '0%',
+                        rotation: 0,
+                        duration: 1.2,
+                        stagger: 0.03,
+                        ease: "power4.out",
+                        scrollTrigger: {
+                            trigger: el,
+                            start: "top 90%",
+                            toggleActions: "play none none none"
+                        }
+                    }
+                );
+            });
+
+            // Fade in standard elements
+            gsap.utils.toArray('.reveal-fade').forEach(element => {
+                gsap.fromTo(element,
+                    { y: 30, opacity: 0 },
+                    {
+                        y: 0, opacity: 1, duration: 1.2, ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: element,
+                            start: "top 85%"
+                        }
+                    }
+                );
+            });
+
+            gsap.from("p, button, footer > div", {
+                y: 20, opacity: 0, duration: 1, stagger: 0.1, ease: "power2.out", delay: 0.8
+            });
+            gsap.from("header", {
+                y: -20, opacity: 0, duration: 1, ease: "power2.out"
+            });
+        });
+
+        // --- Three.js Mars Globe Setup ---
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+
+        // Setup Camera
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 28;
+        camera.position.y = 0;
+        camera.position.x = 8;
+
+        // Setup Renderer
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        // Texture Loader
+        const textureLoader = new THREE.TextureLoader();
+        textureLoader.setCrossOrigin('anonymous');
+
+        // Using Earth topology map as a bump to simulate Martian craters/ridges
+        const bumpMap = textureLoader.load('https://unpkg.com/three-globe/example/img/earth-topology.png');
+
+        // Create Massive Mars Sphere (Significantly increased radius)
+        const geometry = new THREE.SphereGeometry(72, 64, 64);
+        const material = new THREE.MeshStandardMaterial({
+            color: 0xc24117,
+            bumpMap: bumpMap,
+            bumpScale: 1.2,
+            roughness: 0.85,
+            metalness: 0.1
+        });
+
+        const mars = new THREE.Mesh(geometry, material);
+        // Pushed back on the z-axis and offset to accommodate the massive new size
+        mars.position.set(35, -15, -60);
+        scene.add(mars);
+
+        // Thin Martian Atmosphere Glow (Scaled to match)
+        const atmosphereGeometry = new THREE.SphereGeometry(73.5, 64, 64);
+        const atmosphereMaterial = new THREE.MeshBasicMaterial({
+            color: 0xff4400,
+            transparent: true,
+            opacity: 0.08,
+            side: THREE.BackSide,
+            blending: THREE.AdditiveBlending
+        });
+        const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+        mars.add(atmosphere);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.05);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xfff0dd, 1.5);
+        directionalLight.position.set(-10, 5, 8);
+        scene.add(directionalLight);
+
+        // Starfield
+        const starsGeometry = new THREE.BufferGeometry();
+        const starsMaterial = new THREE.PointsMaterial({
+            color: 0xffddcc,
+            size: 0.04,
+            transparent: true,
+            opacity: 0.6,
+            sizeAttenuation: true
+        });
+
+        const starsVertices = [];
+        for (let i = 0; i < 2000; i++) {
+            const x = THREE.MathUtils.randFloatSpread(300);
+            const y = THREE.MathUtils.randFloatSpread(300);
+            const z = THREE.MathUtils.randFloatSpread(150) - 100;
+            starsVertices.push(x, y, z);
+        }
+
+        starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
+        const starField = new THREE.Points(starsGeometry, starsMaterial);
+        scene.add(starField);
+
+        // Animation Loop
+        const animate = function () {
+            requestAnimationFrame(animate);
+
+            // Subtle rotation
+            mars.rotation.y += 0.0003;
+            starField.rotation.y -= 0.0001;
+
+            // Parallax effect on mouse move
+            camera.position.x += (mouseX * 2 - camera.position.x) * 0.02 + 8;
+            camera.position.y += (-mouseY * 2 - camera.position.y) * 0.02;
+            camera.lookAt(scene.position);
+
+            renderer.render(scene, camera);
+        };
+
+        // Mouse interaction
+        let mouseX = 0;
+        let mouseY = 0;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+            mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+        });
+
+        animate();
+
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }, false);
+    </script>
+
+</body></html>

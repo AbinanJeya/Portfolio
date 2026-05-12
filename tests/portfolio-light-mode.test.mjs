@@ -1,0 +1,35 @@
+import { readFile } from 'node:fs/promises';
+import assert from 'node:assert/strict';
+
+const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+
+assert.match(html, /<html lang="en" class="scroll-smooth">/, 'index should default to light mode without the dark class');
+assert.match(html, /<body[^>]*class="[^"]*text-gray-900 bg-white/, 'body should use the LightMode text and page background');
+assert.match(html, /rgba\(255,255,255,0\.85\)/, 'glass slices should use the white LightMode overlay');
+assert.match(html, /vec3 colorOrange = vec3\(0\.91, 0\.34, 0\.04\)/, 'WebGL shader should use the warm LightMode palette');
+assert.match(html, /vec3 colorRose = vec3\(0\.88, 0\.11, 0\.28\)/, 'WebGL shader should include the rose LightMode accent');
+assert.match(html, /id="themeToggle"/, 'portfolio should expose a theme toggle');
+assert.match(html, /data-theme="light"/, 'portfolio should default to light mode');
+assert.match(html, /theme-dark/, 'portfolio should preserve the previous dark aesthetic as a toggleable mode');
+assert.match(html, /colorIndigo/, 'dark mode shader should retain the previous indigo palette');
+assert.match(html, /\.portfolio-light \.light-glass[\s\S]*?clip-path: none[\s\S]*?border-radius: 9999px/, 'light mode glass controls should use the same rounded shape as dark mode');
+assert.match(html, /\.portfolio-light \.light-card[\s\S]*?clip-path: none[\s\S]*?border-radius: 0\.5rem/, 'light mode cards should use the same rounded shape as dark mode');
+assert.match(html, /\.portfolio-light \.primary-action[\s\S]*?clip-path: none[\s\S]*?border-radius: 9999px/, 'light mode primary actions should use the same rounded shape as dark mode');
+assert.match(html, /\.portfolio-light \.secondary-action[\s\S]*?clip-path: none[\s\S]*?border-radius: 9999px/, 'light mode secondary actions should use the same rounded shape as dark mode');
+assert.match(html, /\.theme-dark \.light-card[\s\S]*?clip-path: none/, 'dark mode cards should drop LightMode clipped geometry');
+assert.match(html, /\.theme-dark \.primary-action[\s\S]*?border-radius: 9999px/, 'dark mode primary actions should restore rounded previous aesthetic');
+assert.match(html, /\.theme-dark \.theme-bullet[\s\S]*?background: #67e8f9/, 'dark mode modal bullets should use cyan instead of light-mode orange');
+assert.match(html, /\.portfolio-light \.icon-well[\s\S]*?background: transparent/, 'light mode icon wells should use the rounded transparent icon treatment');
+assert.match(html, /\.portfolio-light \.icon-well[\s\S]*?border-radius: 9999px/, 'light mode icon wells should use the same round shape as dark mode');
+assert.match(html, /\.portfolio-light \.skill-pill[\s\S]*?clip-path: none/, 'light mode icon pills should drop clipped geometry like dark mode');
+assert.match(html, /\.portfolio-light \.skill-pill[\s\S]*?border-radius: 0\.375rem/, 'light mode icon pills should match the rounded dark-mode pill shape');
+assert.match(html, /headshot-frame/, 'headshot should use a theme-aware frame class');
+assert.match(html, /\.theme-dark \.headshot-frame[\s\S]*?border-color: rgba\(103,232,249,0\.22\)/, 'dark headshot border should be subtle themed cyan, not white');
+assert.match(html, /\.theme-dark \.project-card\.light-card[\s\S]*?rgba\(17,19,29,0\.92\)/, 'dark project cards should be solid enough over the animated background');
+assert.match(html, /\.theme-dark \.border-orange-100[\s\S]*?rgba\(103,232,249,0\.16\)/, 'dark dividers should use subtle cyan lines instead of light white lines');
+assert.match(html, /\.theme-dark \.border-white\\\/60[\s\S]*?rgba\(103,232,249,0\.18\)/, 'dark glass slice dividers should use subtle themed lines');
+assert.match(html, /mode_night_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24\.svg/, 'theme toggle should use the existing moon icon asset');
+assert.match(html, /light_mode_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24\.svg/, 'theme toggle should use the existing light icon asset');
+assert.match(html, /icon="solar:server-path-linear"/, 'portfolio feature icon glyphs should be preserved');
+assert.match(html, /icon="solar:graph-new-up-linear"/, 'portfolio feature icon glyphs should be preserved');
+assert.doesNotMatch(html, /bg-\[#030712\]|text-white bg-\[#030712\]/, 'dark-only page background classes should not remain');
