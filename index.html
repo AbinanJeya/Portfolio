@@ -145,10 +145,16 @@
       position: relative;
     }
 
-    .project-card-shell .project-github-link {
+    .project-card-shell > .project-card {
+      min-height: 100%;
+      padding-bottom: 5.5rem;
+    }
+
+    .project-card-shell .project-card-actions {
       position: absolute;
-      top: 0.75rem;
-      right: 0.75rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      bottom: 1.5rem;
       z-index: 5;
     }
 
@@ -1251,19 +1257,38 @@
           return;
         }
 
+        const gridSpanClasses = Array.from(card.classList).filter(className => className.includes('col-span-'));
+
         card.classList.add('w-full');
+        gridSpanClasses.forEach(className => card.classList.remove(className));
         const shell = document.createElement('div');
         shell.className = 'project-card-shell';
+        gridSpanClasses.forEach(className => shell.classList.add(className));
         card.parentNode.insertBefore(shell, card);
         shell.appendChild(card);
+
+        const actions = document.createElement('div');
+        actions.className = 'project-card-actions flex flex-wrap gap-2';
 
         const github = document.createElement('a');
         github.href = card.dataset.github && card.dataset.github !== '#' ? card.dataset.github : 'https://github.com/AbinanJeya';
         github.target = '_blank';
         github.rel = 'noopener noreferrer';
-        github.className = 'project-github-link inline-flex w-max items-center justify-center gap-2 neu-cut-md light-glass neu-shadow px-4 py-2 text-xs font-normal text-orange-600 hover:text-orange-700 transition-all duration-300';
+        github.className = 'inline-flex w-max items-center justify-center gap-2 neu-cut-md light-glass neu-shadow px-4 py-2 text-xs font-normal text-orange-600 hover:text-orange-700 transition-all duration-300';
         github.innerHTML = 'GitHub <iconify-icon icon="solar:code-square-linear" class="text-sm" stroke-width="1.5"></iconify-icon>';
-        shell.appendChild(github);
+        actions.appendChild(github);
+
+        if (card.dataset.website) {
+          const website = document.createElement('a');
+          website.href = card.dataset.website;
+          website.target = '_blank';
+          website.rel = 'noopener noreferrer';
+          website.className = 'inline-flex w-max items-center justify-center gap-2 neu-cut-md bg-[#1c1c1e] px-4 py-2 text-xs font-normal text-white text-on-dark hover:bg-black transition-all neu-shadow';
+          website.innerHTML = 'Visit Site <iconify-icon icon="solar:arrow-right-up-linear" class="text-sm" stroke-width="1.5"></iconify-icon>';
+          actions.appendChild(website);
+        }
+
+        shell.appendChild(actions);
       });
 
       const projectCards = document.querySelectorAll('button.project-card');
