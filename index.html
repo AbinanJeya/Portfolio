@@ -136,6 +136,21 @@
       border-radius: 9999px;
     }
 
+    .preview-shell {
+      aspect-ratio: 9 / 16;
+      max-height: min(70vh, 720px);
+    }
+
+    .portfolio-light .preview-shell {
+      border-color: rgba(25,28,33,0.08) !important;
+      background: rgba(255,255,255,0.7);
+    }
+
+    .theme-dark .preview-shell {
+      border-color: rgba(103,232,249,0.16) !important;
+      background: rgba(3,7,18,0.54);
+    }
+
     body {
       --slice-1: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.85) 100%);
       --slice-2: linear-gradient(to right, rgba(255,255,255,0.85), rgba(255,255,255,0.65));
@@ -386,7 +401,7 @@
           <iconify-icon icon="solar:code-square-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
         </a>
         <a href="https://www.linkedin.com/in/abinan-jeyachandran-abb528183/" target="_blank" rel="noopener noreferrer" class="primary-action inline-flex items-center justify-center gap-2 neu-cut-md bg-[#1c1c1e] px-5 py-2.5 text-sm font-normal text-white text-on-dark hover:bg-black transition-all duration-300 neu-shadow hover:-translate-y-0.5">
-          Connect
+          LinkedIn
           <iconify-icon icon="solar:arrow-right-up-linear" class="text-base opacity-80" stroke-width="1.5"></iconify-icon>
         </a>
       </div>
@@ -785,7 +800,7 @@
           <p class="mt-3 text-sm leading-relaxed text-zinc-400">Unified cloud file management desktop app.</p>
         </button>
 
-        <button type="button" class="project-card anim-element light-card text-left group neu-cut-md border backdrop-blur-md p-6 transition-all duration-300 hover:-translate-y-1" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" data-title="AbWork - Fitness Coach" data-description="Mobile fitness coach app tracking workouts and nutrition with AI-driven insights and Health Connect integration." data-tech="React Native, Expo, Firebase, Health Connect, OpenAI" data-features="Built a mobile fitness coach using React Native and Expo for workouts and nutrition tracking;Integrated Android Health Connect for automatic steps, calories, and sleep tracking;Added coaching with AI-driven insights and daily missions" data-website="https://abinanj.com/AbWorkSite/">
+        <button type="button" class="project-card anim-element light-card text-left group neu-cut-md border backdrop-blur-md p-6 transition-all duration-300 hover:-translate-y-1" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" data-title="AbWork - Fitness Coach" data-description="Mobile fitness coach app tracking workouts and nutrition with AI-driven insights and Health Connect integration." data-tech="React Native, Expo, Firebase, Health Connect, OpenAI" data-features="Built a mobile fitness coach using React Native and Expo for workouts and nutrition tracking;Integrated Android Health Connect for automatic steps, calories, and sleep tracking;Added coaching with AI-driven insights and daily missions" data-website="https://abinanj.com/AbWorkSite/" data-preview="abwork-preview/index.html">
           <div class="flex items-start justify-between gap-5">
             <div class="h-11 w-11 rounded-full icon-well flex items-center justify-center group-hover:scale-110 transition-transform">
               <iconify-icon icon="solar:dumbbell-large-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
@@ -933,7 +948,7 @@
   </div>
 
   <div id="projectModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-gray-900/30 backdrop-blur-md">
-    <div id="modalPanel" class="w-full max-w-2xl light-card neu-cut-md border overflow-hidden">
+    <div id="modalPanel" class="w-full max-w-5xl max-h-[90vh] light-card neu-cut-md border overflow-y-auto">
       <div class="flex items-center justify-between gap-6 p-5 border-b border-orange-100">
         <div>
           <p class="section-label text-xs font-semibold tracking-[0.22em] uppercase font-[JetBrains_Mono]">Project Detail</p>
@@ -956,6 +971,16 @@
           <h3 class="text-xs font-semibold tracking-[0.22em] uppercase text-zinc-500 font-[JetBrains_Mono]">Key Features</h3>
           <ul id="modalFeatures" class="mt-3 space-y-3"></ul>
         </div>
+
+        <details id="modalPreview" class="hidden mt-7">
+          <summary class="secondary-action inline-flex cursor-pointer list-none items-center justify-center gap-2 neu-cut-md light-glass px-5 py-2.5 text-sm font-normal text-orange-600 hover:text-orange-700 transition-all neu-shadow">
+            Live app preview
+            <iconify-icon icon="solar:alt-arrow-down-linear" class="text-base" stroke-width="1.5"></iconify-icon>
+          </summary>
+          <div class="preview-shell mx-auto mt-4 w-full max-w-[23rem] overflow-hidden rounded-[2rem] border p-2 shadow-2xl">
+            <iframe id="modalPreviewFrame" title="AbWork live app preview" class="h-full w-full rounded-[1.55rem] border-0 bg-black" loading="lazy" allow="fullscreen"></iframe>
+          </div>
+        </details>
 
         <div id="modalLinks" class="mt-8 flex flex-wrap gap-3"></div>
       </div>
@@ -1151,6 +1176,8 @@
       const modalTech = document.getElementById('modalTech');
       const modalFeatures = document.getElementById('modalFeatures');
       const modalLinks = document.getElementById('modalLinks');
+      const modalPreview = document.getElementById('modalPreview');
+      const modalPreviewFrame = document.getElementById('modalPreviewFrame');
       const projectCards = document.querySelectorAll('.project-card');
 
       function openProject(card) {
@@ -1159,6 +1186,17 @@
         modalTech.innerHTML = '';
         modalFeatures.innerHTML = '';
         modalLinks.innerHTML = '';
+
+        if (modalPreview && modalPreviewFrame) {
+          modalPreview.open = false;
+          if (card.dataset.preview) {
+            modalPreview.classList.remove('hidden');
+            modalPreviewFrame.src = card.dataset.preview;
+          } else {
+            modalPreview.classList.add('hidden');
+            modalPreviewFrame.removeAttribute('src');
+          }
+        }
 
         const techItems = (card.dataset.tech || '').split(',').map(item => item.trim()).filter(Boolean);
         techItems.forEach(item => {
@@ -1212,6 +1250,10 @@
         modal.classList.add('hidden');
         modal.classList.remove('flex');
         document.body.style.overflow = '';
+        if (modalPreview && modalPreviewFrame) {
+          modalPreview.open = false;
+          modalPreviewFrame.removeAttribute('src');
+        }
       }
 
       projectCards.forEach(card => {
