@@ -1,337 +1,1140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio of Abinan Jeyachandran, a Computer Engineering graduate from Toronto Metropolitan University specializing in software development, system optimization, and AI integration.">
-    <title>Abinan's Portfolio</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Abinan Jeyachandran, a Computer Engineering graduate from Toronto Metropolitan University specializing in software development, system optimization, AI integration, automation, and secure systems.">
+  <title>Abinan Jeyachandran — Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {}
+      }
+    }
+  </script>
+  <style>
+    .neu-cut-sm {
+      clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+    }
+
+    .neu-cut-md {
+      clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+    }
+
+    .neu-shadow {
+      box-shadow: 0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08);
+    }
+
+    .portfolio-light .light-glass {
+      border: 1px solid transparent;
+      background: linear-gradient(rgba(255,255,255,0.62), rgba(255,255,255,0.62)) padding-box, linear-gradient(135deg, #fdba74, #fda4af) border-box;
+    }
+
+    .portfolio-light .light-card {
+      border-color: rgba(25,28,33,0.08) !important;
+      background: rgba(255,255,255,0.62) !important;
+      box-shadow: 0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08);
+    }
+
+    .portfolio-light .light-card:hover {
+      border-color: rgba(234,88,12,0.35) !important;
+      background: rgba(255,247,237,0.78) !important;
+    }
+
+    .portfolio-light .text-white,
+    .portfolio-light .text-zinc-100 {
+      color: #111827 !important;
+    }
+
+    .portfolio-light .text-zinc-200,
+    .portfolio-light .text-zinc-300 {
+      color: #374151 !important;
+    }
+
+    .portfolio-light .text-zinc-400,
+    .portfolio-light .text-zinc-500 {
+      color: #4b5563 !important;
+    }
+
+    .portfolio-light .text-indigo-200,
+    .portfolio-light .text-indigo-300,
+    .portfolio-light .text-indigo-400,
+    .portfolio-light .text-cyan-300,
+    .portfolio-light .text-cyan-400 {
+      color: #ea580c !important;
+    }
+
+    .portfolio-light .text-on-dark {
+      color: #fff !important;
+    }
+
+    .portfolio-light .section-label {
+      color: #ea580c !important;
+    }
+
+    .portfolio-light .icon-well {
+      background: transparent !important;
+      color: #ea580c !important;
+      border: 1px solid rgba(234,88,12,0.22);
+      box-shadow: none;
+    }
+
+    .portfolio-light .headshot-frame {
+      border-color: rgba(234,88,12,0.22) !important;
+      box-shadow: 0 24px 56px -32px rgba(234,88,12,0.45);
+    }
+
+    .portfolio-light .skill-pill {
+      border-color: rgba(25,28,33,0.08) !important;
+      background: rgba(255,255,255,0.58) !important;
+      color: #374151 !important;
+    }
+
+    .portfolio-light .skill-pill:hover {
+      background: #fff7ed !important;
+      color: #111827 !important;
+    }
+
+    .portfolio-light .input-light {
+      border-color: rgba(25,28,33,0.08) !important;
+      background: rgba(255,255,255,0.78) !important;
+      color: #111827 !important;
+    }
+
+    .portfolio-light .input-light::placeholder {
+      color: #9ca3af;
+    }
+
+    body {
+      --slice-1: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.85) 100%);
+      --slice-2: linear-gradient(to right, rgba(255,255,255,0.85), rgba(255,255,255,0.65));
+      --slice-3: linear-gradient(to right, rgba(255,255,255,0.65), rgba(255,255,255,0.4));
+      --slice-4: linear-gradient(to right, rgba(255,255,255,0.4), rgba(255,255,255,0.15));
+      --slice-5: linear-gradient(to right, rgba(255,255,255,0.15), rgba(255,255,255,0.02));
+      --slice-shadow-2: -15px 0 30px -10px rgba(255,255,255,1);
+      --slice-shadow-3: -15px 0 30px -10px rgba(255,255,255,0.9);
+      --slice-shadow-4: -15px 0 30px -10px rgba(255,255,255,0.6);
+      --slice-shadow-5: -15px 0 30px -10px rgba(255,255,255,0.3);
+      --page-wash: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body.theme-dark {
+      --slice-1: linear-gradient(to right, rgba(3,7,18,1) 0%, rgba(3,7,18,0.86) 100%);
+      --slice-2: linear-gradient(to right, rgba(3,7,18,0.86), rgba(3,7,18,0.66));
+      --slice-3: linear-gradient(to right, rgba(3,7,18,0.66), rgba(3,7,18,0.42));
+      --slice-4: linear-gradient(to right, rgba(3,7,18,0.42), rgba(3,7,18,0.16));
+      --slice-5: linear-gradient(to right, rgba(3,7,18,0.16), rgba(3,7,18,0.02));
+      --slice-shadow-2: -15px 0 30px -10px rgba(0,0,0,0.5);
+      --slice-shadow-3: -15px 0 30px -10px rgba(0,0,0,0.4);
+      --slice-shadow-4: -15px 0 30px -10px rgba(0,0,0,0.3);
+      --slice-shadow-5: -15px 0 30px -10px rgba(0,0,0,0.2);
+      --page-wash: radial-gradient(circle at 18% 20%, rgba(79,70,229,0.16), transparent 28%), radial-gradient(circle at 72% 12%, rgba(6,182,212,0.12), transparent 24%), linear-gradient(to bottom, rgba(3,7,18,0), rgba(3,7,18,1));
+      background: #030712 !important;
+      color: #fff !important;
+      selection-background-color: rgba(99,102,241,0.3);
+    }
+
+    .theme-dark .light-glass {
+      clip-path: none;
+      border-radius: 9999px;
+      border-color: rgba(99,102,241,0.3) !important;
+      background: rgba(3,7,18,0.42) !important;
+      color: #a5b4fc !important;
+    }
+
+    .theme-dark .light-card {
+      clip-path: none;
+      border-radius: 0.5rem;
+      border-color: rgba(255,255,255,0.1) !important;
+      background: rgba(255,255,255,0.035) !important;
+      box-shadow: none;
+    }
+
+    .theme-dark .project-card.light-card {
+      background: rgba(17,19,29,0.92) !important;
+      backdrop-filter: blur(12px);
+    }
+
+    .theme-dark #modalPanel.light-card,
+    .theme-dark #contactForm.light-card {
+      background: rgba(17,19,29,0.94) !important;
+      backdrop-filter: blur(14px);
+    }
+
+    .theme-dark .light-card:hover {
+      border-color: rgba(129,140,248,0.4) !important;
+      background: rgba(255,255,255,0.055) !important;
+    }
+
+    .theme-dark .text-gray-900,
+    .theme-dark .text-zinc-100,
+    .theme-dark .text-white {
+      color: #fff !important;
+    }
+
+    .theme-dark .text-gray-600,
+    .theme-dark .text-gray-700,
+    .theme-dark .text-zinc-400,
+    .theme-dark .text-zinc-500 {
+      color: #a1a1aa !important;
+    }
+
+    .theme-dark .text-orange-600,
+    .theme-dark .section-label,
+    .theme-dark .text-indigo-300,
+    .theme-dark .text-cyan-300,
+    .theme-dark .text-indigo-400,
+    .theme-dark .text-cyan-400 {
+      color: #67e8f9 !important;
+    }
+
+    .theme-dark .theme-brand-dot,
+    .theme-dark .theme-gradient-text {
+      color: #4f46e5 !important;
+    }
+
+    .theme-dark .theme-gradient-text {
+      background-image: linear-gradient(to right, #4f46e5, #06b6d4) !important;
+    }
+
+    .theme-dark .icon-well {
+      background: transparent !important;
+      color: #818cf8 !important;
+      border: 1px solid rgba(129,140,248,0.24);
+      box-shadow: none;
+    }
+
+    .theme-dark .headshot-frame {
+      border-color: rgba(103,232,249,0.22) !important;
+      box-shadow: 0 24px 56px -32px rgba(79,70,229,0.55);
+    }
+
+    .theme-dark #projects .icon-well {
+      background: transparent !important;
+      border-color: rgba(103,232,249,0.2);
+      color: #67e8f9 !important;
+    }
+
+    .theme-dark .skill-pill {
+      clip-path: none;
+      border-radius: 0.375rem;
+      border-color: rgba(255,255,255,0.06) !important;
+      background: rgba(255,255,255,0.02) !important;
+      color: #d4d4d8 !important;
+    }
+
+    .theme-dark .skill-pill:hover {
+      background: rgba(255,255,255,0.06) !important;
+      color: #fff !important;
+    }
+
+    .theme-dark .input-light {
+      clip-path: none;
+      border-radius: 0.5rem;
+      border-color: rgba(255,255,255,0.1) !important;
+      background: rgba(9,9,11,0.62) !important;
+      color: #fff !important;
+    }
+
+    .theme-dark .primary-action {
+      clip-path: none;
+      border-radius: 9999px;
+      background: #fff !important;
+      color: #09090b !important;
+    }
+
+    .theme-dark .primary-action:hover {
+      background: #f4f4f5 !important;
+    }
+
+    .theme-dark .secondary-action {
+      clip-path: none;
+      border-radius: 9999px;
+      border-color: rgba(99,102,241,0.3) !important;
+      background: rgba(9,9,11,0.42) !important;
+      color: #a5b4fc !important;
+    }
+
+    .theme-dark .theme-bullet {
+      background: #67e8f9 !important;
+    }
+
+    .theme-dark .neu-shadow {
+      border-color: rgba(255,255,255,0.1) !important;
+      background: rgba(255,255,255,0.03) !important;
+      color: #a1a1aa !important;
+      box-shadow: none;
+    }
+
+    .theme-dark #themeToggle {
+      outline: none;
+    }
+
+    .theme-dark #themeToggle:focus-visible {
+      box-shadow: 0 0 0 2px rgba(103,232,249,0.7);
+    }
+
+    .theme-dark .primary-action.neu-shadow {
+      border-color: transparent !important;
+      background: #fff !important;
+      color: #09090b !important;
+      box-shadow: 0 10px 24px -18px rgba(255,255,255,0.45);
+    }
+
+    .theme-dark .secondary-action.neu-shadow,
+    .theme-dark .light-glass.neu-shadow {
+      border-color: rgba(99,102,241,0.3) !important;
+      background: rgba(9,9,11,0.42) !important;
+      color: #a5b4fc !important;
+    }
+
+    .theme-dark .border-orange-100 {
+      border-color: rgba(103,232,249,0.16) !important;
+    }
+
+    .theme-dark .border-white\/60,
+    .theme-dark .border-white\/40,
+    .theme-dark .border-white\/20,
+    .theme-dark .border-white\/10 {
+      border-color: rgba(103,232,249,0.18) !important;
+    }
+
+    .theme-dark .theme-toggle-icon-light,
+    .theme-dark .theme-toggle-icon-dark {
+      filter: brightness(0) invert(1);
+    }
+
+    .theme-light .theme-toggle-icon-dark,
+    .theme-dark .theme-toggle-icon-light {
+      display: none;
+    }
+  </style>
 </head>
 
-<body class="darkmode">
-    
-    <script type="text/javascript" src="darkmode.js" defer></script>
-    <script type="text/javascript" src="script.js" defer></script>
-    
-    <!-- Cursor Trail Elements -->
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    
-    <!-- Dark/light mode button -->
-    <button id="theme-switch" aria-label="Toggle Dark Mode">
-        <div class="theme-slider"></div>
-        <i class="fa-solid fa-sun sun-icon"></i>
-        <i class="fa-solid fa-moon moon-icon"></i>
-    </button>
+<body data-theme="light" class="portfolio-light theme-light antialiased text-gray-900 bg-white overflow-x-hidden min-h-screen font-[Geist] selection:bg-orange-100 selection:text-orange-900">
 
-    <!-- NAVBAR -->
-    <nav>
-        <div class="left">
-            <a href="/" class="logo">Abinan Jeyachandran</a>
-        </div>
-        <div class="right">
-            <a href="https://github.com/Abzamer13" target="_blank" rel="noopener noreferrer">
-                <i class="fa-brands fa-github"></i> 
-                <span>Github</span>
-            </a>
+  <div class="fixed inset-y-0 right-0 w-[120vw] md:w-[70vw] translate-x-[10%] md:translate-x-0 z-0 overflow-hidden pointer-events-none">
+    <canvas id="webgl-canvas" class="absolute inset-0 w-full h-full"></canvas>
 
-            <a href="https://www.linkedin.com/in/abinan-jeyachandran-abb528183/" target="_blank" rel="noopener noreferrer">
-                <i class="fa-brands fa-linkedin"></i>
-                <span>Linkedin</span>
-            </a>
-
-            <a href="mailto:abinan.jeyachandran@gmail.com">
-                <i class="fa-solid fa-envelope"></i>
-                <span>Email</span>
-            </a>
-        </div>
-    </nav>
-
-    <main>
-        <!-- SECTION 1: HERO -->
-        <section class="hero-section">
-            <div class="text">
-                <h2>Hi, I'm Abinan <img src="1 (1).gif" alt="wave" class="inline-gif"></h2>
-                <p class="typed-tagline"><span id="typed-text"></span><span class="cursor"> </span></p>
-                <p>I'm a Computer Engineering graduate from Toronto Metropolitan University with expertise in software development, system optimization, and AI integration. I enjoy building efficient solutions that solve real-world problems.</p>
-                <div class="links">
-                    <a href="#Skills">
-                        <i class="fa-solid fa-code"></i>
-                        <span>Skills</span>
-                    </a>
-                    <a href="#Projects">
-                        <i class="fa-solid fa-pen"></i>
-                        <span>Projects</span>
-                    </a>
-                    <a href="#Contact">
-                        <i class="fa-solid fa-envelope"></i>
-                        <span>Contact</span>          
-                    </a>
-                    <!-- New Resume Button -->
-                    <a href="assets/AbinanJeyachandranResume.pdf" target="_blank" rel="noopener noreferrer" id="resumeBtn">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                        <span>Resume</span>
-                    </a>
-                    <!-- Vegeta GIF -->
-                    <img src="Vegeta_vegeta_32.gif" alt="Vegeta" class="masenko-gif">
-                </div>
-            </div>
-
-            <div class="headshot">
-                <img src="hero-headshot.webp" alt="Abinan Headshot"> 
-            </div>
-        </section>
-        <div class="kame-divider">
-            <div class="kame-left"></div>
-            <div class="kame-beam"></div>
-            <div class="kame-right"></div>
-        </div>
-
-        <!-- SECTION 2: Skills -->
-        <section id="Skills" class="skills-section fade-in"> 
-            <h2>Skills</h2>
-            <div class="cells">
-                <div class="cell">
-                    <img src="html-logo.webp" alt="html logo">
-                    <span>HTML</span>
-                </div>
-
-                <div class="cell">
-                    <img src="css-logo.webp" alt="css logo">
-                    <span>CSS</span>
-                </div>
-
-                <div class="cell">
-                    <img src="python-logo.webp" alt="python logo">
-                    <span>Python</span>
-                </div>
-
-                <div class="cell">
-                    <img src="javascript-logo.webp" alt="javascript logo">
-                    <span>Javascript</span>
-                </div>
-
-                <div class="cell">
-                    <img src="nodejs-logo.webp" alt="nodejs logo">
-                    <span>NodeJS</span>
-                </div>
-
-                <div class="cell">
-                    <img src="react-logo.webp" alt="react logo">
-                    <span>React</span>
-                </div>
-            </div>
-        </section>
-        <div class="kame-divider">
-            <div class="kame-left"></div>
-            <div class="kame-beam"></div>
-            <div class="kame-right"></div>
-        </div>
-
-        <!-- SECTION 3: Projects -->
-<section id="Projects" class="projects-section fade-in">
-    <h2>Projects</h2>
-    <div class="projects-grid">
-
-        <!-- Project 1 -->
-        <div class="project-card">
-            <div class="project-content">
-                <h3 class="project-title">Learning Path Recommender</h3>
-                <div class="project-tech">
-                    <span class="tech-pill">React</span>
-                    <span class="tech-pill">Node.js</span>
-                    <span class="tech-pill">Express</span>
-                    <span class="tech-pill">Tailwind</span>
-                    <span class="tech-pill">OpenAI API</span>
-                </div>
-                <p class="project-description">
-                    An AI-powered full-stack application that generates personalized learning roadmaps based on user goals.
-                </p>
-                <ul class="project-features">
-                    <li>Built full-stack architecture using React and Node.js to dynamically generate customized learning paths</li>
-                    <li>Engineered REST APIs with Express for persistent state management and user progress tracking</li>
-                    <li>Integrated OpenAI API to generate structured educational roadmaps</li>
-                    <li>Optimized UI rendering with Tailwind CSS for responsive mobile-first design</li>
-                </ul>
-                <div class="project-links">
-                    <a href="https://github.com/AbinanJeya/Learning-Path-Recommender" target="_blank">
-                        <i class="fa-brands fa-github"></i> View Code
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Project 2 -->
-        <div class="project-card">
-            <div class="project-content">
-                <h3 class="project-title">Football Match Prediction</h3>
-                <div class="project-tech">
-                    <span class="tech-pill">Python</span>
-                    <span class="tech-pill">Scikit-learn</span>
-                    <span class="tech-pill">Pandas</span>
-                    <span class="tech-pill">Matplotlib</span>
-                </div>
-                <p class="project-description">
-                    A machine learning system that predicts football match outcomes using statistical modeling.
-                </p>
-                <ul class="project-features">
-                    <li>Trained machine learning classifiers using Scikit-learn achieving 75% prediction accuracy</li>
-                    <li>Engineered data features with Pandas to enhance dataset quality and model performance</li>
-                    <li>Automated data scraping with Python scripts for real-time statistical updates</li>
-                    <li>Visualized performance trends using Matplotlib for data-driven insights</li>
-                </ul>
-                <div class="project-links">
-                    <a href="https://github.com/AbinanJeya/Predict-Football-Match-Winners-" target="_blank">
-                        <i class="fa-brands fa-github"></i> View Code
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Project 3 -->
-        <div class="project-card">
-            <div class="project-content">
-                <h3 class="project-title">Secure Banking System</h3>
-                <div class="project-tech">
-                    <span class="tech-pill">Python</span>
-                    <span class="tech-pill">AES</span>
-                    <span class="tech-pill">HMAC</span>
-                    <span class="tech-pill">Socket Programming</span>
-                </div>
-                <p class="project-description">
-                    A secure client-server banking application implementing encryption and authentication protocols.
-                </p>
-                <ul class="project-features">
-                    <li>Architected modular backend services in Python to isolate transaction logic</li>
-                    <li>Implemented AES encryption and HMAC authentication to secure financial data</li>
-                    <li>Designed secure logging systems for monitoring and rapid diagnostics</li>
-                </ul>
-                <div class="project-links">
-                    <a href="https://github.com/AbinanJeya/Secure_Banking_System" target="_blank">
-                        <i class="fa-brands fa-github"></i> View Code
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Project 4 -->
-        <div class="project-card">
-            <div class="project-content">
-                <h3 class="project-title">Encrypted File Transfer</h3>
-                <div class="project-tech">
-                    <span class="tech-pill">Python</span>
-                    <span class="tech-pill">AES-256</span>
-                    <span class="tech-pill">Tkinter</span>
-                    <span class="tech-pill">Socket API</span>
-                </div>
-                <p class="project-description">
-                    A multi-threaded encrypted file transfer application with a GUI interface.
-                </p>
-                <ul class="project-features">
-                    <li>Implemented AES-256 encryption to ensure secure data transmission</li>
-                    <li>Developed multi-threaded socket handling to increase system throughput by ~50%</li>
-                    <li>Built GUI front-end using Tkinter to simplify user file transfers</li>
-                </ul>
-                <div class="project-links">
-                    <a href="https://github.com/AbinanJeya/AES-RSA-File-Transfer" target="_blank">
-                        <i class="fa-brands fa-github"></i> View Code
-                    </a>
-                </div>
-            </div>
-        </div>
-
+    <div class="absolute inset-0 flex">
+      <div class="h-full flex-1 relative border-l border-transparent" style="background: var(--slice-1);"></div>
+      <div class="h-full flex-1 relative border-l border-white/60" style="background: var(--slice-2); box-shadow: var(--slice-shadow-2); backdrop-filter: blur(16px);"></div>
+      <div class="h-full flex-1 relative border-l border-white/40" style="background: var(--slice-3); box-shadow: var(--slice-shadow-3); backdrop-filter: blur(12px);"></div>
+      <div class="h-full flex-1 relative border-l border-white/20" style="background: var(--slice-4); box-shadow: var(--slice-shadow-4); backdrop-filter: blur(6px);"></div>
+      <div class="h-full flex-1 relative border-l border-white/10" style="background: var(--slice-5); box-shadow: var(--slice-shadow-5); backdrop-filter: blur(2px);"></div>
     </div>
-</section>
-        <div class="kame-divider">
-            <div class="kame-left"></div>
-            <div class="kame-beam"></div>
-            <div class="kame-right"></div>
+  </div>
+
+  <div class="fixed inset-0 z-0 pointer-events-none" style="background: var(--page-wash);"></div>
+
+  <div class="relative z-10 w-full max-w-[88rem] mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
+
+    <header class="anim-element flex items-center justify-between py-7 md:py-8" style="opacity: 0; transform: translateY(-10px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+      <a href="#home" class="flex items-center gap-1 text-lg font-normal tracking-tight text-gray-900 uppercase">
+        AJ<span class="theme-brand-dot text-[#ea580c] text-xl leading-none">°</span>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-10 text-sm font-normal text-gray-600">
+        <a href="#skills" class="hover:text-gray-900 transition-colors">Skills</a>
+        <a href="#projects" class="hover:text-gray-900 transition-colors">Projects</a>
+        <a href="#contact" class="hover:text-gray-900 transition-colors">Contact</a>
+        <a href="assets/AbinanJeyachandranResume.pdf" target="_blank" rel="noopener noreferrer" class="hover:text-gray-900 transition-colors">Resume</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Toggle theme" class="h-10 w-10 rounded-full border border-gray-200 bg-white/70 text-gray-600 hover:text-gray-900 hover:bg-orange-50 flex items-center justify-center transition-all neu-shadow">
+          <img src="mode_night_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg" alt="" class="theme-toggle-icon-light h-5 w-5" aria-hidden="true">
+          <img src="light_mode_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg" alt="" class="theme-toggle-icon-dark h-5 w-5" aria-hidden="true">
+        </button>
+        <a href="mailto:abinan.jeyachandran@gmail.com" aria-label="Email Abinan" title="Email" class="hidden sm:inline-flex items-center justify-center h-10 w-10 rounded-full border border-gray-200 bg-white/70 text-gray-600 hover:text-gray-900 hover:bg-orange-50 transition-all neu-shadow">
+          <iconify-icon icon="solar:letter-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+        </a>
+        <a href="https://github.com/AbinanJeya" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" class="hidden sm:inline-flex items-center justify-center h-10 w-10 rounded-full border border-gray-200 bg-white/70 text-gray-600 hover:text-gray-900 hover:bg-orange-50 transition-all neu-shadow">
+          <iconify-icon icon="solar:code-square-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+        </a>
+        <a href="https://www.linkedin.com/in/abinan-jeyachandran-abb528183/" target="_blank" rel="noopener noreferrer" class="primary-action inline-flex items-center justify-center gap-2 neu-cut-md bg-[#1c1c1e] px-5 py-2.5 text-sm font-normal text-white text-on-dark hover:bg-black transition-all duration-300 neu-shadow hover:-translate-y-0.5">
+          Connect
+          <iconify-icon icon="solar:arrow-right-up-linear" class="text-base opacity-80" stroke-width="1.5"></iconify-icon>
+        </a>
+      </div>
+    </header>
+
+    <main id="home" class="min-h-[calc(100vh-6rem)] flex flex-col md:flex-row items-center justify-between pt-16 pb-16 md:pt-20 md:pb-12 gap-10">
+      <div class="max-w-3xl flex-1">
+        <div class="anim-element neu-cut-sm light-glass neu-shadow mb-8 w-max inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-normal text-orange-600 backdrop-blur-md" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+          <iconify-icon icon="solar:cpu-bolt-linear" class="text-base" stroke-width="1.5"></iconify-icon>
+          Computer Engineering Graduate · Toronto Metropolitan University
         </div>
 
-        <!-- SECTION 4: Contact -->
-        <section id="Contact" class="contact-section fade-in">
-            <h2>Contact</h2>
-            <!-- Decorative GIF centered above contact info -->
-            <div class="contact-gif-wrapper">
-                <img src="1 (2).gif" alt="Animation" class="contact-gif">
-            </div>
-            <div class="contact-info">
-                <p>Feel free to reach out to me for collaboration or any inquiries!</p>
+        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-gray-900 leading-[1.05] font-light tracking-tighter gs-reveal-container">
+          <span class="inline-flex overflow-hidden pb-1 pt-1"><span class="gs-reveal-word translate-y-[110%] will-change-transform">Building secure,</span></span><br>
+          <span class="inline-flex overflow-hidden pb-1 pt-1"><span class="gs-reveal-word translate-y-[110%] will-change-transform">intelligent systems.</span></span><br>
+          <span class="inline-flex overflow-hidden pb-1 pt-1"><span class="gs-reveal-word translate-y-[110%] will-change-transform theme-gradient-text text-transparent bg-clip-text bg-gradient-to-r from-[#ea580c] to-[#e11d48] font-light tracking-tighter">From idea to scale.</span></span>
+        </h1>
 
-                <!-- Contact Details -->
-                <div class="contact-details">
-                    <a href="mailto:abinan.jeyachandran@gmail.com">
-                        <i class="fa-solid fa-envelope"></i>
-                        <span>abinan.jeyachandran@gmail.com</span>
-                    </a>
-                    <a href="tel:647-803-9461">
-                        <i class="fa-solid fa-phone"></i>
-                        <span>647-803-9461</span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/abinan-jeyachandran-abb528183/" target="_blank">
-                        <i class="fa-brands fa-linkedin"></i>
-                        <span>LinkedIn Profile</span>
-                    </a>
-                </div>
+        <p class="anim-element mt-7 text-base md:text-lg text-gray-600 leading-relaxed max-w-[34rem]" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.3s;">
+          Hi, I’m Abinan Jeyachandran. I specialize in software development, system optimization, AI integration, secure applications, automation, and full-stack engineering.
+        </p>
 
-                <!-- Contact Form -->
-                <form id="contactForm" class="contact-form" action="https://api.web3forms.com/submit" method="POST">
-                    <!-- Web3Forms Access Key (emails go to abinan.jeyachandran@gmail.com) -->
-                    <input type="hidden" name="access_key" value="ae12fbf0-fdce-4065-bde4-5b4c2a8491af">
-                    <input type="hidden" name="subject" value="New Contact from Portfolio Website">
-                    <input type="hidden" name="from_name" value="Portfolio Contact Form">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
-                    <button type="submit" id="sendBtn">Send Message</button>
-                    <p id="formMessage" class="form-message"></p>
-                </form>
-            </div>
-        </section>
+        <div class="anim-element mt-10 flex flex-wrap items-center gap-4" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.4s;">
+          <a href="#projects" class="primary-action inline-flex items-center justify-center gap-2 neu-cut-md bg-[#1c1c1e] px-7 py-3.5 text-sm font-normal text-white text-on-dark hover:bg-black transition-all duration-300 neu-shadow hover:-translate-y-0.5">
+            View projects
+            <iconify-icon icon="solar:arrow-right-up-linear" class="text-lg opacity-80" stroke-width="1.5"></iconify-icon>
+          </a>
+          <a href="#contact" class="secondary-action inline-flex items-center justify-center gap-2 neu-cut-md light-glass neu-shadow backdrop-blur-md px-7 py-3.5 text-sm font-normal text-orange-600 hover:text-orange-700 hover:-translate-y-0.5 transition-all duration-300">
+            Contact me
+          </a>
+          <a href="assets/AbinanJeyachandranResume.pdf" target="_blank" rel="noopener noreferrer" class="secondary-action inline-flex items-center justify-center gap-2 neu-cut-md light-glass neu-shadow backdrop-blur-md px-7 py-3.5 text-sm font-normal text-orange-600 hover:text-orange-700 hover:-translate-y-0.5 transition-all duration-300">
+            Resume
+            <iconify-icon icon="solar:document-text-linear" class="text-lg" stroke-width="1.5"></iconify-icon>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Headshot Area -->
+      <div class="anim-element flex shrink-0 justify-center w-full md:w-72 lg:w-96 mt-12 md:mt-0" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+        <img src="pp2.jpg" alt="Abinan Headshot" class="headshot-frame w-64 h-64 md:w-72 md:h-72 lg:w-96 lg:h-96 object-cover rounded-3xl border border-white/70 transition-all duration-500">
+      </div>
     </main>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-links">
-            <a href="https://github.com/Abzamer13" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <i class="fa-brands fa-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/abinan-jeyachandran-abb528183/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                <i class="fa-brands fa-linkedin"></i>
-            </a>
-            <a href="mailto:abinan.jeyachandran@gmail.com" aria-label="Email">
-                <i class="fa-solid fa-envelope"></i>
-            </a>
+    <div class="anim-element pb-8 pt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-10 border-t border-orange-100" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+        <div class="flex items-center gap-4 group cursor-default">
+          <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full icon-well group-hover:scale-110 transition-transform duration-300">
+            <iconify-icon icon="solar:server-path-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-zinc-100">Backend Systems</h3>
+            <p class="text-xs text-zinc-400 mt-0.5">APIs, automation, async workflows</p>
+          </div>
         </div>
-        <p>&copy; 2026 Abinan Jeyachandran. All rights reserved.</p>
-    </footer>
 
-    
-    
+        <div class="flex items-center gap-4 group cursor-default">
+          <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full icon-well group-hover:scale-110 transition-transform duration-300">
+            <iconify-icon icon="solar:shield-check-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-zinc-100">Security First</h3>
+            <p class="text-xs text-zinc-400 mt-0.5">AES, HMAC, OAuth, RBAC</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4 group cursor-default">
+          <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full icon-well group-hover:scale-110 transition-transform duration-300">
+            <iconify-icon icon="solar:graph-new-up-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-zinc-100">AI Integration</h3>
+            <p class="text-xs text-zinc-400 mt-0.5">ML pipelines and intelligent tools</p>
+          </div>
+        </div>
+    </div>
+
+    <section id="skills" class="py-10 md:py-16 border-t border-orange-100">
+      <div class="anim-element flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+        <div>
+          <p class="section-label text-xs font-semibold tracking-[0.22em] uppercase font-[JetBrains_Mono]">Capabilities</p>
+          <h2 class="mt-3 text-3xl md:text-5xl font-light tracking-tight text-white">Skills that ship products.</h2>
+        </div>
+        <p class="text-sm md:text-base text-zinc-400 leading-relaxed max-w-xl">
+          A practical stack across frontend, backend, automation, security, machine learning, desktop apps, mobile apps, and hardware-level systems.
+        </p>
+      </div>
+
+      <div class="flex flex-col">
+        
+        <!-- Languages -->
+        <div class="anim-element border-b border-orange-100 py-6 first:pt-0" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+          <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4 md:gap-8 items-start">
+            <h3 class="text-sm font-medium tracking-tight text-white md:mt-2">Languages</h3>
+            <div class="flex flex-wrap gap-2.5">
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:code-2-linear" class="text-indigo-400 text-base"></iconify-icon> Python
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:programming-linear" class="text-cyan-400 text-base"></iconify-icon> JavaScript
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:hashtag-linear" class="text-indigo-400 text-base"></iconify-icon> TypeScript
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:bolt-linear" class="text-cyan-400 text-base"></iconify-icon> C#
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:cup-hot-linear" class="text-indigo-400 text-base"></iconify-icon> Java
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:shield-keyhole-linear" class="text-cyan-400 text-base"></iconify-icon> Rust
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:cpu-linear" class="text-indigo-400 text-base"></iconify-icon> C &amp; VHDL
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frontend & Mobile -->
+        <div class="anim-element border-b border-orange-100 py-6" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+          <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4 md:gap-8 items-start">
+            <h3 class="text-sm font-medium tracking-tight text-white md:mt-2">Frontend &amp; Mobile</h3>
+            <div class="flex flex-wrap gap-2.5">
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:widget-5-linear" class="text-indigo-400 text-base"></iconify-icon> React
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:smartphone-linear" class="text-cyan-400 text-base"></iconify-icon> React Native
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:code-square-linear" class="text-indigo-400 text-base"></iconify-icon> HTML &amp; CSS
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:pen-new-round-linear" class="text-cyan-400 text-base"></iconify-icon> Tailwind CSS
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:monitor-smartphone-linear" class="text-indigo-400 text-base"></iconify-icon> Tauri
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:window-frame-linear" class="text-cyan-400 text-base"></iconify-icon> Tkinter
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Backend & APIs -->
+        <div class="anim-element border-b border-orange-100 py-6" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+          <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4 md:gap-8 items-start">
+            <h3 class="text-sm font-medium tracking-tight text-white md:mt-2">Backend &amp; APIs</h3>
+            <div class="flex flex-wrap gap-2.5">
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:server-linear" class="text-indigo-400 text-base"></iconify-icon> Node.js
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:server-path-linear" class="text-cyan-400 text-base"></iconify-icon> Express
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:server-square-linear" class="text-indigo-400 text-base"></iconify-icon> ASP.NET Core
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:bolt-circle-linear" class="text-cyan-400 text-base"></iconify-icon> FastAPI
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:network-linear" class="text-indigo-400 text-base"></iconify-icon> Socket APIs
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:shield-check-linear" class="text-cyan-400 text-base"></iconify-icon> AES &amp; HMAC
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Machine Learning & AI -->
+        <div class="anim-element border-b border-orange-100 py-6" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+          <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4 md:gap-8 items-start">
+            <h3 class="text-sm font-medium tracking-tight text-white md:mt-2">Machine Learning &amp; AI</h3>
+            <div class="flex flex-wrap gap-2.5">
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:chart-2-linear" class="text-indigo-400 text-base"></iconify-icon> Scikit-learn
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:database-linear" class="text-cyan-400 text-base"></iconify-icon> Pandas
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:graph-up-linear" class="text-indigo-400 text-base"></iconify-icon> XGBoost
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:chart-square-linear" class="text-cyan-400 text-base"></iconify-icon> MLflow
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:magic-stick-3-linear" class="text-indigo-400 text-base"></iconify-icon> OpenAI API
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Databases & Cloud -->
+        <div class="anim-element border-b border-orange-100 py-6" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+          <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4 md:gap-8 items-start">
+            <h3 class="text-sm font-medium tracking-tight text-white md:mt-2">Databases &amp; Cloud</h3>
+            <div class="flex flex-wrap gap-2.5">
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:database-linear" class="text-indigo-400 text-base"></iconify-icon> PostgreSQL
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:database-linear" class="text-cyan-400 text-base"></iconify-icon> SQLite
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:database-linear" class="text-indigo-400 text-base"></iconify-icon> EF Core
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:server-square-update-linear" class="text-cyan-400 text-base"></iconify-icon> Redis
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:flame-linear" class="text-indigo-400 text-base"></iconify-icon> Firebase
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:box-linear" class="text-cyan-400 text-base"></iconify-icon> Docker
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testing & DevOps -->
+        <div class="anim-element pt-6" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+          <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4 md:gap-8 items-start">
+            <h3 class="text-sm font-medium tracking-tight text-white md:mt-2">Testing &amp; DevOps</h3>
+            <div class="flex flex-wrap gap-2.5">
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:test-tube-linear" class="text-indigo-400 text-base"></iconify-icon> Selenium
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:bug-minimalistic-linear" class="text-cyan-400 text-base"></iconify-icon> TestNG
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:box-minimalistic-linear" class="text-indigo-400 text-base"></iconify-icon> Maven
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:play-circle-linear" class="text-cyan-400 text-base"></iconify-icon> GitHub Actions
+              </span>
+              <span class="skill-pill inline-flex items-center gap-2 neu-cut-sm border px-3 py-1.5 text-sm transition-colors">
+                <iconify-icon icon="solar:graph-new-linear" class="text-indigo-400 text-base"></iconify-icon> Prometheus
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="projects" class="py-10 md:py-16 border-t border-orange-100">
+      <div class="anim-element flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+        <div>
+          <p class="section-label text-xs font-semibold tracking-[0.22em] uppercase font-[JetBrains_Mono]">Selected Work</p>
+          <h2 class="mt-3 text-3xl md:text-5xl font-light tracking-tight text-white">Projects engineered with depth.</h2>
+        </div>
+        <p class="text-sm md:text-base text-zinc-400 leading-relaxed max-w-xl">
+          Click any project to view the tech stack, key features, and source or live links.
+        </p>
+      </div>
+
+      <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+
+        <button type="button" class="project-card anim-element light-card text-left group neu-cut-md border backdrop-blur-md p-6 transition-all duration-300 hover:-translate-y-1" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" data-title="Learning Path Recommender" data-description="AI-powered full-stack application generating personalized learning roadmaps based on user goals." data-tech="React, Node.js, Express, Tailwind, OpenAI API" data-features="Built full-stack architecture using React and Node.js to dynamically generate customized learning paths;Engineered REST APIs with Express for persistent state management and user progress tracking;Integrated OpenAI API to generate structured educational roadmaps" data-github="https://github.com/AbinanJeya/Learning-Path-Recommender">
+          <div class="flex items-start justify-between gap-5">
+            <div class="h-11 w-11 rounded-full icon-well flex items-center justify-center group-hover:scale-110 transition-transform">
+              <iconify-icon icon="solar:map-arrow-right-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+            </div>
+            <span class="text-xs text-zinc-500 font-[JetBrains_Mono]">AI</span>
+          </div>
+          <h3 class="mt-7 text-lg font-medium tracking-tight text-white">Learning Path Recommender</h3>
+          <p class="mt-3 text-sm leading-relaxed text-zinc-400">Personalized roadmaps based on user goals.</p>
+        </button>
+
+        <button type="button" class="project-card anim-element light-card text-left group neu-cut-md border backdrop-blur-md p-6 transition-all duration-300 hover:-translate-y-1" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" data-title="Football Match Prediction" data-description="Machine learning system predicting football match outcomes using statistical modeling and data scraping." data-tech="Python, Scikit-learn, Pandas, Matplotlib" data-features="Trained machine learning classifiers using Scikit-learn achieving 75% prediction accuracy;Engineered data features with Pandas to enhance dataset quality and model performance;Automated data scraping with Python scripts for real-time statistical updates" data-github="https://github.com/AbinanJeya/Predict-Football-Match-Winners-">
+          <div class="flex items-start justify-between gap-5">
+            <div class="h-11 w-11 rounded-full icon-well flex items-center justify-center group-hover:scale-110 transition-transform">
+              <iconify-icon icon="solar:chart-2-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+            </div>
+            <span class="text-xs text-zinc-500 font-[JetBrains_Mono]">ML</span>
+          </div>
+          <h3 class="mt-7 text-lg font-medium tracking-tight text-white">Football Match Prediction</h3>
+          <p class="mt-3 text-sm leading-relaxed text-zinc-400">Predictive modeling for match outcomes.</p>
+        </button>
+
+        <button type="button" class="project-card anim-element light-card text-left group neu-cut-md border backdrop-blur-md p-6 transition-all duration-300 hover:-translate-y-1" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" data-title="Secure Banking System" data-description="Client-server banking application implementing AES encryption and HMAC authentication protocols." data-tech="Python, AES, HMAC, Socket Programming" data-features="Architected modular backend services in Python to isolate transaction logic;Implemented AES encryption and HMAC authentication to secure financial data;Designed secure logging systems for monitoring and rapid diagnostics" data-github="https://github.com/AbinanJeya/Secure_Banking_System">
+          <div class="flex items-start justify-between gap-5">
+            <div class="h-11 w-11 rounded-full icon-well flex items-center justify-center group-hover:scale-110 transition-transform">
+              <iconify-icon icon="solar:banknote-2-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+            </div>
+            <span class="text-xs text-zinc-500 font-[JetBrains_Mono]">SEC</span>
+          </div>
+          <h3 class="mt-7 text-lg font-medium tracking-tight text-white">Secure Banking System</h3>
+          <p class="mt-3 text-sm leading-relaxed text-zinc-400">Encrypted client-server banking workflows.</p>
+        </button>
+
+        <button type="button" class="project-card anim-element light-card text-left group neu-cut-md border backdrop-blur-md p-6 transition-all duration-300 hover:-translate-y-1" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" data-title="Encrypted File Transfer" data-description="Multi-threaded encrypted file transfer application featuring a Tkinter GUI and secure data transmission." data-tech="Python, AES-256, Tkinter, Socket API" data-features="Implemented AES-256 encryption to ensure secure data transmission;Developed multi-threaded socket handling to increase system throughput by approximately 50%;Built GUI front-end using Tkinter to simplify user file transfers" data-github="https://github.com/AbinanJeya/AES-RSA-File-Transfer">
+          <div class="flex items-start justify-between gap-5">
+            <div class="h-11 w-11 rounded-full icon-well flex items-center justify-center group-hover:scale-110 transition-transform">
+              <iconify-icon icon="solar:lock-keyhole-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+            </div>
+            <span class="text-xs text-zinc-500 font-[JetBrains_Mono]">AES</span>
+          </div>
+          <h3 class="mt-7 text-lg font-medium tracking-tight text-white">Encrypted File Transfer</h3>
+          <p class="mt-3 text-sm leading-relaxed text-zinc-400">Secure multi-threaded file transmission.</p>
+        </button>
+
+        <button type="button" class="project-card anim-element light-card text-left group neu-cut-md border backdrop-blur-md p-6 transition-all duration-300 hover:-translate-y-1" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" data-title="OmniDrive" data-description="Desktop-first file manager unifying multiple Google Drive accounts with a Rust-secured OAuth backend." data-tech="React, TypeScript, Tauri, Rust, SQLite" data-features="Architected a desktop-first file manager using React and Tauri to unify multiple Google Drive accounts;Secured OAuth flows using a Rust backend, storing access tokens directly within native OS keyring;Implemented a SQLite indexing layer for efficient querying across large datasets" data-github="https://github.com/AbinanJeya/TorDrive" data-website="https://abinanj.com/OmniDrive/">
+          <div class="flex items-start justify-between gap-5">
+            <div class="h-11 w-11 rounded-full icon-well flex items-center justify-center group-hover:scale-110 transition-transform">
+              <iconify-icon icon="solar:cloud-storage-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+            </div>
+            <span class="text-xs text-zinc-500 font-[JetBrains_Mono]">APP</span>
+          </div>
+          <h3 class="mt-7 text-lg font-medium tracking-tight text-white">OmniDrive</h3>
+          <p class="mt-3 text-sm leading-relaxed text-zinc-400">Unified cloud file management desktop app.</p>
+        </button>
+
+        <button type="button" class="project-card anim-element light-card text-left group neu-cut-md border backdrop-blur-md p-6 transition-all duration-300 hover:-translate-y-1" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" data-title="AbWork - Fitness Coach" data-description="Mobile fitness coach app tracking workouts and nutrition with AI-driven insights and Health Connect integration." data-tech="React Native, Expo, Firebase, Health Connect, OpenAI" data-features="Built a mobile fitness coach using React Native and Expo for workouts and nutrition tracking;Integrated Android Health Connect for automatic steps, calories, and sleep tracking;Added coaching with AI-driven insights and daily missions" data-website="https://abinanj.com/AbWorkSite/">
+          <div class="flex items-start justify-between gap-5">
+            <div class="h-11 w-11 rounded-full icon-well flex items-center justify-center group-hover:scale-110 transition-transform">
+              <iconify-icon icon="solar:dumbbell-large-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+            </div>
+            <span class="text-xs text-zinc-500 font-[JetBrains_Mono]">MOB</span>
+          </div>
+          <h3 class="mt-7 text-lg font-medium tracking-tight text-white">AbWork - Fitness Coach</h3>
+          <p class="mt-3 text-sm leading-relaxed text-zinc-400">AI-driven workout and nutrition coaching.</p>
+        </button>
+
+        <button type="button" class="project-card anim-element light-card text-left group neu-cut-md border backdrop-blur-md p-6 transition-all duration-300 hover:-translate-y-1" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" data-title="Workflow Automation Engine" data-description="Configurable ASP.NET Core backend system executing multi-step automation via a pluggable handler architecture." data-tech="C#, .NET, ASP.NET Core, SQLite, EF Core" data-features="Engineered a workflow engine using ASP.NET Core and REST APIs for multi-step automation;Built a pluggable handler system enabling dynamic step execution including validation, transformation, and notifications;Applied asynchronous processing using System.Threading.Channels to manage workflow execution" data-github="https://github.com/AbinanJeya/Workflow-Automation-Engine">
+          <div class="flex items-start justify-between gap-5">
+            <div class="h-11 w-11 rounded-full icon-well flex items-center justify-center group-hover:scale-110 transition-transform">
+              <iconify-icon icon="solar:settings-minimalistic-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+            </div>
+            <span class="text-xs text-zinc-500 font-[JetBrains_Mono]">API</span>
+          </div>
+          <h3 class="mt-7 text-lg font-medium tracking-tight text-white">Workflow Automation Engine</h3>
+          <p class="mt-3 text-sm leading-relaxed text-zinc-400">Pluggable backend automation system.</p>
+        </button>
+
+        <button type="button" class="project-card anim-element light-card text-left group neu-cut-md border backdrop-blur-md p-6 transition-all duration-300 hover:-translate-y-1" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" data-title="HPS-FPGA MD5 Decryption" data-description="Hardware-accelerated MD5 decryption system achieving 32x throughput using 32 parallel FPGA engines." data-tech="VHDL, C, Intel Cyclone V, QSys" data-features="Implemented 32 parallel MD5 engines in VHDL achieving up to 32× throughput;Engineered HPS–FPGA interfaces using custom AXI-Lite bridges for seamless data transfer;Developed Yocto Linux C controller to orchestrate operation and report real-time metrics" data-github="https://github.com/AbinanJeya/HPS-FPGA-MD5">
+          <div class="flex items-start justify-between gap-5">
+            <div class="h-11 w-11 rounded-full icon-well flex items-center justify-center group-hover:scale-110 transition-transform">
+              <iconify-icon icon="solar:cpu-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+            </div>
+            <span class="text-xs text-zinc-500 font-[JetBrains_Mono]">FPGA</span>
+          </div>
+          <h3 class="mt-7 text-lg font-medium tracking-tight text-white">HPS-FPGA MD5 Decryption</h3>
+          <p class="mt-3 text-sm leading-relaxed text-zinc-400">Hardware-accelerated parallel decryption.</p>
+        </button>
+
+        <button type="button" class="project-card anim-element light-card text-left group neu-cut-md border backdrop-blur-md p-6 transition-all duration-300 hover:-translate-y-1" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" data-title="Insurance Test Automation" data-description="Enterprise-grade Java Selenium regression testing framework validating complex insurance workflows." data-tech="Java, Selenium, TestNG, Maven, GitHub Actions" data-features="Built a Java Selenium framework using TestNG and Page Object Model for insurance testing;Implemented regression and smoke suites with data-driven testing using structured JSON datasets;Integrated GitHub Actions CI/CD pipelines with headless execution and automated reporting" data-github="#">
+          <div class="flex items-start justify-between gap-5">
+            <div class="h-11 w-11 rounded-full icon-well flex items-center justify-center group-hover:scale-110 transition-transform">
+              <iconify-icon icon="solar:bug-minimalistic-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+            </div>
+            <span class="text-xs text-zinc-500 font-[JetBrains_Mono]">QA</span>
+          </div>
+          <h3 class="mt-7 text-lg font-medium tracking-tight text-white">Insurance Test Automation</h3>
+          <p class="mt-3 text-sm leading-relaxed text-zinc-400">Regression testing for complex workflows.</p>
+        </button>
+
+        <button type="button" class="project-card anim-element light-card text-left group neu-cut-md border backdrop-blur-md p-6 transition-all duration-300 hover:-translate-y-1 md:col-span-2 xl:col-span-1" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);" data-title="Financial Risk Intelligence" data-description="Production-grade ML fraud detection system providing real-time risk scoring for financial transactions." data-tech="Python, FastAPI, XGBoost, MLflow, PostgreSQL, Docker, React, Prometheus" data-features="Built fraud detection system using FastAPI and XGBoost for real-time risk scoring on financial transactions;Developed ML pipeline with scikit-learn and MLflow for training, evaluation, and reproducible model tracking;Deployed inference system using Docker, Redis, and Celery for async and batch prediction workflows;Implemented CI/CD, structured logging, and Prometheus monitoring with JWT auth and RBAC" data-github="https://github.com/AbinanJeya/Financial-Risk-Intelligence-Platform">
+          <div class="flex items-start justify-between gap-5">
+            <div class="h-11 w-11 rounded-full icon-well flex items-center justify-center group-hover:scale-110 transition-transform">
+              <iconify-icon icon="solar:shield-warning-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+            </div>
+            <span class="text-xs text-zinc-500 font-[JetBrains_Mono]">RISK</span>
+          </div>
+          <h3 class="mt-7 text-lg font-medium tracking-tight text-white">Financial Risk Intelligence</h3>
+          <p class="mt-3 text-sm leading-relaxed text-zinc-400">Real-time fraud detection and risk scoring.</p>
+        </button>
+      </div>
+    </section>
+
+    <section id="contact" class="py-10 md:py-16 border-t border-orange-100">
+      <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-start">
+        <div class="anim-element" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+          <p class="section-label text-xs font-semibold tracking-[0.22em] uppercase font-[JetBrains_Mono]">Contact</p>
+          <h2 class="mt-3 text-3xl md:text-5xl font-light tracking-tight text-white">Let’s build something useful.</h2>
+          <p class="mt-6 text-sm md:text-base text-zinc-400 leading-relaxed max-w-xl">
+            Feel free to reach out for collaboration, software engineering opportunities, automation work, AI integrations, or project inquiries.
+          </p>
+
+          <div class="mt-9 space-y-4">
+            <a href="mailto:abinan.jeyachandran@gmail.com" class="group light-card neu-cut-md flex items-center gap-4 border backdrop-blur-md p-4 transition-all">
+              <div class="h-10 w-10 rounded-full icon-well flex items-center justify-center">
+                <iconify-icon icon="solar:letter-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-white">Email</p>
+                <p class="text-xs text-zinc-400 group-hover:text-zinc-300 transition-colors">abinan.jeyachandran@gmail.com</p>
+              </div>
+            </a>
+
+            <a href="tel:647-803-9461" class="group light-card neu-cut-md flex items-center gap-4 border backdrop-blur-md p-4 transition-all">
+              <div class="h-10 w-10 rounded-full icon-well flex items-center justify-center">
+                <iconify-icon icon="solar:phone-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-white">Phone</p>
+                <p class="text-xs text-zinc-400 group-hover:text-zinc-300 transition-colors">647-803-9461</p>
+              </div>
+            </a>
+
+            <a href="https://www.linkedin.com/in/abinan-jeyachandran-abb528183/" target="_blank" rel="noopener noreferrer" class="group light-card neu-cut-md flex items-center gap-4 border backdrop-blur-md p-4 transition-all">
+              <div class="h-10 w-10 rounded-full icon-well flex items-center justify-center">
+                <iconify-icon icon="solar:users-group-rounded-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-white">LinkedIn</p>
+                <p class="text-xs text-zinc-400 group-hover:text-zinc-300 transition-colors">Abinan Jeyachandran</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" class="anim-element light-card neu-cut-md border backdrop-blur-md p-5 md:p-6" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+          <input type="hidden" name="access_key" value="ae12fbf0-fdce-4065-bde4-5b4c2a8491af">
+          <input type="hidden" name="subject" value="New Contact from Portfolio Website">
+          <input type="hidden" name="from_name" value="Portfolio Contact Form">
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <label class="block">
+              <span class="text-xs font-medium text-zinc-400">Name</span>
+              <input type="text" name="name" required="" placeholder="Your name" class="input-light mt-2 w-full neu-cut-sm border px-4 py-3 text-sm outline-none focus:border-orange-400/60 focus:ring-4 focus:ring-orange-500/10 transition-all">
+            </label>
+
+            <label class="block">
+              <span class="text-xs font-medium text-zinc-400">Email</span>
+              <input type="email" name="email" required="" placeholder="you@example.com" class="input-light mt-2 w-full neu-cut-sm border px-4 py-3 text-sm outline-none focus:border-orange-400/60 focus:ring-4 focus:ring-orange-500/10 transition-all">
+            </label>
+          </div>
+
+          <label class="block mt-4">
+            <span class="text-xs font-medium text-zinc-400">Message</span>
+            <textarea name="message" required="" rows="6" placeholder="Tell me about your project, opportunity, or idea..." class="input-light mt-2 w-full resize-none neu-cut-sm border px-4 py-3 text-sm outline-none focus:border-orange-400/60 focus:ring-4 focus:ring-orange-500/10 transition-all"></textarea>
+          </label>
+
+          <button type="submit" id="sendBtn" class="primary-action mt-5 w-full inline-flex items-center justify-center gap-2 neu-cut-md bg-[#1c1c1e] px-7 py-3.5 text-sm font-normal text-white text-on-dark hover:bg-black transition-all duration-300 neu-shadow hover:-translate-y-0.5">
+            Send message
+            <iconify-icon icon="solar:plain-2-linear" class="text-lg" stroke-width="1.5"></iconify-icon>
+          </button>
+
+          <p id="formMessage" class="mt-4 text-xs text-zinc-400"></p>
+        </form>
+      </div>
+    </section>
+
+    <footer class="py-10 border-t border-orange-100 flex flex-col md:flex-row items-center justify-between gap-5">
+      <p class="text-xs text-zinc-500">© 2026 Abinan Jeyachandran. All rights reserved.</p>
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/AbinanJeya" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="h-10 w-10 rounded-full border border-gray-200 bg-white/70 text-gray-600 hover:text-gray-900 hover:bg-orange-50 flex items-center justify-center transition-all neu-shadow">
+          <iconify-icon icon="solar:code-square-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+        </a>
+        <a href="https://www.linkedin.com/in/abinan-jeyachandran-abb528183/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="h-10 w-10 rounded-full border border-gray-200 bg-white/70 text-gray-600 hover:text-gray-900 hover:bg-orange-50 flex items-center justify-center transition-all neu-shadow">
+          <iconify-icon icon="solar:users-group-rounded-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+        </a>
+        <a href="mailto:abinan.jeyachandran@gmail.com" aria-label="Email" class="h-10 w-10 rounded-full border border-gray-200 bg-white/70 text-gray-600 hover:text-gray-900 hover:bg-orange-50 flex items-center justify-center transition-all neu-shadow">
+          <iconify-icon icon="solar:letter-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+        </a>
+      </div>
+    </footer>
+  </div>
+
+  <div id="projectModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-gray-900/30 backdrop-blur-md">
+    <div id="modalPanel" class="w-full max-w-2xl light-card neu-cut-md border overflow-hidden">
+      <div class="flex items-center justify-between gap-6 p-5 border-b border-orange-100">
+        <div>
+          <p class="section-label text-xs font-semibold tracking-[0.22em] uppercase font-[JetBrains_Mono]">Project Detail</p>
+          <h2 id="modalTitle" class="mt-2 text-2xl md:text-3xl font-light tracking-tight text-white">Project Title</h2>
+        </div>
+        <button id="closeModal" type="button" aria-label="Close project modal" class="h-10 w-10 shrink-0 rounded-full border border-gray-200 bg-white/70 text-gray-600 hover:text-gray-900 hover:bg-orange-50 flex items-center justify-center transition-all neu-shadow">
+          <iconify-icon icon="solar:close-circle-linear" class="text-2xl" stroke-width="1.5"></iconify-icon>
+        </button>
+      </div>
+
+      <div class="p-5 md:p-6">
+        <p id="modalDesc" class="text-sm md:text-base leading-relaxed text-zinc-400"></p>
+
+        <div class="mt-6">
+          <h3 class="text-xs font-semibold tracking-[0.22em] uppercase text-zinc-500 font-[JetBrains_Mono]">Tech Stack</h3>
+          <div id="modalTech" class="mt-3 flex flex-wrap gap-2"></div>
+        </div>
+
+        <div class="mt-7">
+          <h3 class="text-xs font-semibold tracking-[0.22em] uppercase text-zinc-500 font-[JetBrains_Mono]">Key Features</h3>
+          <ul id="modalFeatures" class="mt-3 space-y-3"></ul>
+        </div>
+
+        <div id="modalLinks" class="mt-8 flex flex-wrap gap-3"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('webgl-canvas');
+
+    if (window.THREE && canvas) {
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      const scene = new THREE.Scene();
+      const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+      const geometry = new THREE.PlaneGeometry(2, 2);
+
+      const material = new THREE.ShaderMaterial({
+            uniforms: {
+              u_time: { value: 0.0 },
+              u_resolution: { value: new THREE.Vector2() },
+              u_darkMode: { value: 0.0 }
+            },
+        vertexShader: `
+          void main() {
+            gl_Position = vec4(position, 1.0);
+          }
+        `,
+        fragmentShader: `
+          uniform float u_time;
+          uniform vec2 u_resolution;
+          uniform float u_darkMode;
+
+          vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
+
+          float snoise(vec2 v){
+            const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
+            vec2 i  = floor(v + dot(v, C.yy) );
+            vec2 x0 = v - i + dot(i, C.xx);
+            vec2 i1;
+            i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+            vec4 x12 = x0.xyxy + C.xxzz;
+            x12.xy -= i1;
+            i = mod(i, 289.0);
+            vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
+            vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
+            m = m*m;
+            m = m*m;
+            vec3 x = 2.0 * fract(p * C.www) - 1.0;
+            vec3 h = abs(x) - 0.5;
+            vec3 ox = floor(x + 0.5);
+            vec3 a0 = x - ox;
+            m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+            vec3 g;
+            g.x = a0.x * x0.x + h.x * x0.y;
+            g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+            return 130.0 * dot(m, g);
+          }
+
+          void main() {
+            vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+
+            float n = snoise(uv * 2.5 + vec2(u_time * 0.4, u_time * 0.5));
+            float n2 = snoise(uv * 1.5 - vec2(u_time * 0.3, u_time * 0.2));
+
+            vec3 colorOrange = vec3(0.91, 0.34, 0.04);
+            vec3 colorRose = vec3(0.88, 0.11, 0.28);
+            vec3 colorDeep = vec3(1.0, 0.85, 0.65);
+            vec3 colorIndigo = vec3(0.31, 0.27, 0.90);
+            vec3 colorCyan = vec3(0.02, 0.71, 0.83);
+            vec3 colorDarkDeep = vec3(0.08, 0.06, 0.28);
+
+            float mixVal = smoothstep(-0.6, 0.8, n);
+            vec3 lightColor = mix(colorDeep, colorOrange, mixVal);
+            vec3 darkColor = mix(colorDarkDeep, colorIndigo, mixVal);
+
+            float mixVal2 = smoothstep(-0.4, 0.9, n2);
+            lightColor = mix(lightColor, colorRose, mixVal2 * 0.8);
+            darkColor = mix(darkColor, colorCyan, mixVal2 * 0.78);
+
+            float alphaFade = smoothstep(-0.2, 0.6, uv.x);
+            vec3 finalColor = mix(lightColor, darkColor, u_darkMode);
+
+            gl_FragColor = vec4(finalColor, alphaFade);
+          }
+        `
+      });
+      window.portfolioShaderMaterial = material;
+
+      const mesh = new THREE.Mesh(geometry, material);
+      scene.add(mesh);
+
+      function resizeCanvas() {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        renderer.setSize(width, height);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        material.uniforms.u_resolution.value.set(width, height);
+      }
+
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      function animateWebGL(time) {
+        material.uniforms.u_time.value = time * 0.002;
+        renderer.render(scene, camera);
+        requestAnimationFrame(animateWebGL);
+      }
+
+      requestAnimationFrame(animateWebGL);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeToggle = document.getElementById('themeToggle');
+      const applyTheme = (theme) => {
+        const isDark = theme === 'dark';
+        document.body.dataset.theme = theme;
+        document.body.classList.toggle('theme-dark', isDark);
+        document.body.classList.toggle('theme-light', !isDark);
+        document.documentElement.classList.toggle('dark', isDark);
+
+        if (themeToggle) {
+          themeToggle.setAttribute('aria-pressed', String(isDark));
+          themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+
+        if (window.portfolioShaderMaterial) {
+          window.portfolioShaderMaterial.uniforms.u_darkMode.value = isDark ? 1.0 : 0.0;
+        }
+
+        try {
+          localStorage.setItem('portfolio-theme', theme);
+        } catch (error) {
+          // Theme persistence is optional when storage is unavailable.
+        }
+      };
+
+      let savedTheme = 'light';
+      try {
+        savedTheme = localStorage.getItem('portfolio-theme') || 'light';
+      } catch (error) {
+        savedTheme = 'light';
+      }
+
+      applyTheme(savedTheme === 'dark' ? 'dark' : 'light');
+
+      if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+          applyTheme(document.body.dataset.theme === 'dark' ? 'light' : 'dark');
+        });
+      }
+
+      if (window.gsap) {
+        if (window.ScrollTrigger) {
+          gsap.registerPlugin(ScrollTrigger);
+        }
+
+        gsap.to('.gs-reveal-word', {
+          y: '0%',
+          ease: 'power4.out',
+          duration: 1.2,
+          stagger: 0.1,
+          scrollTrigger: window.ScrollTrigger ? {
+            trigger: '.gs-reveal-container',
+            start: 'top 85%'
+          } : undefined
+        });
+      } else {
+        document.querySelectorAll('.gs-reveal-word').forEach(el => {
+          el.style.transform = 'translateY(0)';
+        });
+      }
+
+      const elements = document.querySelectorAll('.anim-element');
+
+      const reveal = () => {
+        elements.forEach((el, index) => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.92) {
+            setTimeout(() => {
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0)';
+            }, Math.min(index * 35, 420));
+          }
+        });
+      };
+
+      reveal();
+      window.addEventListener('scroll', reveal, { passive: true });
+
+      const modal = document.getElementById('projectModal');
+      const closeModal = document.getElementById('closeModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalDesc = document.getElementById('modalDesc');
+      const modalTech = document.getElementById('modalTech');
+      const modalFeatures = document.getElementById('modalFeatures');
+      const modalLinks = document.getElementById('modalLinks');
+      const projectCards = document.querySelectorAll('.project-card');
+
+      function openProject(card) {
+        modalTitle.textContent = card.dataset.title || 'Project';
+        modalDesc.textContent = card.dataset.description || '';
+        modalTech.innerHTML = '';
+        modalFeatures.innerHTML = '';
+        modalLinks.innerHTML = '';
+
+        const techItems = (card.dataset.tech || '').split(',').map(item => item.trim()).filter(Boolean);
+        techItems.forEach(item => {
+          const pill = document.createElement('span');
+          pill.className = 'skill-pill inline-flex items-center neu-cut-sm border px-3 py-1 text-xs font-medium';
+          pill.textContent = item;
+          modalTech.appendChild(pill);
+        });
+
+        const features = (card.dataset.features || '').split(';').map(item => item.trim()).filter(Boolean);
+        features.forEach(item => {
+          const li = document.createElement('li');
+          li.className = 'flex gap-3 text-sm leading-relaxed text-gray-700';
+          li.innerHTML = '<span class="theme-bullet mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-orange-500"></span><span>' + item + '</span>';
+          modalFeatures.appendChild(li);
+        });
+
+        if (card.dataset.website) {
+          const website = document.createElement('a');
+          website.href = card.dataset.website;
+          website.target = '_blank';
+          website.rel = 'noopener noreferrer';
+          website.className = 'inline-flex items-center justify-center gap-2 neu-cut-md bg-[#1c1c1e] px-5 py-2.5 text-sm font-normal text-white text-on-dark hover:bg-black transition-all neu-shadow';
+          website.innerHTML = 'View website <iconify-icon icon="solar:arrow-right-up-linear" class="text-base" stroke-width="1.5"></iconify-icon>';
+          modalLinks.appendChild(website);
+        }
+
+        if (card.dataset.github && card.dataset.github !== '#') {
+          const github = document.createElement('a');
+          github.href = card.dataset.github;
+          github.target = '_blank';
+          github.rel = 'noopener noreferrer';
+          github.className = 'inline-flex items-center justify-center gap-2 neu-cut-md light-glass px-5 py-2.5 text-sm font-normal text-orange-600 hover:text-orange-700 transition-all neu-shadow';
+          github.innerHTML = 'View source <iconify-icon icon="solar:code-square-linear" class="text-base" stroke-width="1.5"></iconify-icon>';
+          modalLinks.appendChild(github);
+        }
+
+        if (!modalLinks.children.length) {
+          const unavailable = document.createElement('span');
+          unavailable.className = 'text-xs text-zinc-500';
+          unavailable.textContent = 'Repository link unavailable.';
+          modalLinks.appendChild(unavailable);
+        }
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeProject() {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      }
+
+      projectCards.forEach(card => {
+        card.addEventListener('click', () => openProject(card));
+      });
+
+      closeModal.addEventListener('click', closeProject);
+      modal.addEventListener('click', event => { if (event.target === modal) closeProject(); });
+      document.addEventListener('keydown', event => { if (event.key === 'Escape' && !modal.classList.contains('hidden')) closeProject(); });
+
+      const contactForm = document.getElementById('contactForm');
+      const formMessage = document.getElementById('formMessage');
+      const sendBtn = document.getElementById('sendBtn');
+
+      if (contactForm) {
+        contactForm.addEventListener('submit', () => {
+          formMessage.textContent = 'Sending your message...';
+          formMessage.className = 'mt-4 text-xs text-orange-600';
+          sendBtn.disabled = true;
+          sendBtn.classList.add('opacity-70', 'cursor-not-allowed');
+        });
+      }
+    });
+  </script>
+
 </body>
 </html>
