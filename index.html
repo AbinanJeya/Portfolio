@@ -167,6 +167,21 @@
       justify-content: center;
     }
 
+    .typing-caret {
+      display: inline-block;
+      width: 0.08em;
+      height: 1.1em;
+      margin-left: 0.18rem;
+      background: currentColor;
+      transform: translateY(0.18em);
+      animation: caretBlink 0.9s step-end infinite;
+    }
+
+    @keyframes caretBlink {
+      0%, 45% { opacity: 1; }
+      46%, 100% { opacity: 0; }
+    }
+
     .portfolio-light .preview-shell {
       border-color: rgba(25,28,33,0.08) !important;
       background: rgba(255,255,255,0.7);
@@ -474,8 +489,13 @@
       </div>
       
       <!-- Headshot Area -->
-      <div class="anim-element flex shrink-0 justify-center w-full md:w-72 lg:w-96 mt-12 md:mt-0" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+      <div class="anim-element flex shrink-0 flex-col items-center justify-center w-full md:w-72 lg:w-96 mt-12 md:mt-0" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
         <img src="pp2.jpg" alt="Abinan Headshot" class="headshot-frame w-64 h-64 md:w-72 md:h-72 lg:w-96 lg:h-96 object-cover rounded-3xl border border-white/70 transition-all duration-500">
+        <div class="mt-5 inline-flex max-w-full flex-wrap items-center justify-center gap-2 text-center light-glass neu-shadow backdrop-blur-md px-4 py-2 text-sm md:text-base font-normal text-orange-600">
+          <span class="text-zinc-400">I work as a</span>
+          <span id="typingRoleText" class="font-medium text-white" aria-live="polite">Full Stack Engineer</span>
+          <span class="typing-caret" aria-hidden="true"></span>
+        </div>
       </div>
     </main>
 
@@ -770,53 +790,6 @@
       </div>
     </section>
 
-    <section class="py-8 md:py-10 border-t border-orange-100">
-      <div class="anim-element flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-6" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
-        <div>
-          <p class="section-label text-xs font-semibold tracking-[0.22em] uppercase font-[JetBrains_Mono]">Proof of Work</p>
-          <h2 class="mt-3 text-2xl md:text-4xl font-light tracking-tight text-white">Live builds recruiters can open.</h2>
-        </div>
-        <p class="text-sm md:text-base text-zinc-400 leading-relaxed max-w-xl">
-          The fastest route to signal: production links, interactive demos, and source-backed projects.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <a href="#projects" class="anim-element light-card neu-cut-md border backdrop-blur-md p-5 transition-all duration-300 hover:-translate-y-1 group" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
-          <div class="flex items-start justify-between gap-4">
-            <div class="h-10 w-10 rounded-full icon-well flex items-center justify-center group-hover:scale-110 transition-transform">
-              <iconify-icon icon="solar:smartphone-update-linear" class="text-lg" stroke-width="1.5"></iconify-icon>
-            </div>
-            <span class="skill-pill inline-flex items-center neu-cut-sm border px-2.5 py-1 text-[0.68rem] font-medium">Live Demo</span>
-          </div>
-          <h3 class="mt-5 text-lg font-medium tracking-tight text-white">AbWork mobile preview</h3>
-          <p class="mt-2 text-sm leading-relaxed text-zinc-400">Interactive fitness product preview embedded directly in the portfolio.</p>
-        </a>
-
-        <a href="https://www.majesticequity.abinanj.com/" target="_blank" rel="noopener noreferrer" class="anim-element light-card neu-cut-md border backdrop-blur-md p-5 transition-all duration-300 hover:-translate-y-1 group" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
-          <div class="flex items-start justify-between gap-4">
-            <div class="h-10 w-10 rounded-full icon-well flex items-center justify-center group-hover:scale-110 transition-transform">
-              <iconify-icon icon="solar:buildings-2-linear" class="text-lg" stroke-width="1.5"></iconify-icon>
-            </div>
-            <span class="skill-pill inline-flex items-center neu-cut-sm border px-2.5 py-1 text-[0.68rem] font-medium">Production</span>
-          </div>
-          <h3 class="mt-5 text-lg font-medium tracking-tight text-white">MajesticEquity site</h3>
-          <p class="mt-2 text-sm leading-relaxed text-zinc-400">Mortgage platform work tied to real onboarding and document workflows.</p>
-        </a>
-
-        <a href="https://abinanj.com/OmniDrive/" target="_blank" rel="noopener noreferrer" class="anim-element light-card neu-cut-md border backdrop-blur-md p-5 transition-all duration-300 hover:-translate-y-1 group" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
-          <div class="flex items-start justify-between gap-4">
-            <div class="h-10 w-10 rounded-full icon-well flex items-center justify-center group-hover:scale-110 transition-transform">
-              <iconify-icon icon="solar:cloud-storage-linear" class="text-lg" stroke-width="1.5"></iconify-icon>
-            </div>
-            <span class="skill-pill inline-flex items-center neu-cut-sm border px-2.5 py-1 text-[0.68rem] font-medium">Live Site</span>
-          </div>
-          <h3 class="mt-5 text-lg font-medium tracking-tight text-white">OmniDrive product page</h3>
-          <p class="mt-2 text-sm leading-relaxed text-zinc-400">Desktop file-management product with React, Tauri, Rust, and OAuth depth.</p>
-        </a>
-      </div>
-    </section>
-
     <section id="projects" class="py-10 md:py-16 border-t border-orange-100">
       <div class="anim-element flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
         <div>
@@ -1071,7 +1044,7 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-4">
+      <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-4 items-start">
         <article class="anim-element light-card neu-cut-md border backdrop-blur-md p-6 md:p-7 transition-all duration-300 hover:-translate-y-1" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
           <div class="flex items-start justify-between gap-5">
             <div class="h-11 w-11 rounded-full icon-well flex items-center justify-center">
@@ -1095,7 +1068,7 @@
           </div>
         </article>
 
-        <div class="anim-element grid grid-cols-1 sm:grid-cols-3 gap-4" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+        <div class="anim-element grid grid-cols-1 sm:grid-cols-3 gap-4 items-start" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
           <article class="light-card neu-cut-md border backdrop-blur-md p-5">
             <p class="text-xs font-[JetBrains_Mono] uppercase tracking-[0.2em] text-zinc-500">Full name</p>
             <p class="mt-3 text-base font-medium text-white">Abinan Jeyachandran</p>
@@ -1439,6 +1412,62 @@
 
       reveal();
       window.addEventListener('scroll', reveal, { passive: true });
+
+      const typingRoleText = document.getElementById('typingRoleText');
+      const roleTitles = [
+        'Full Stack Engineer',
+        'AI/ML Engineer',
+        'Backend Automation Engineer',
+        'Secure Systems Engineer',
+        'Mobile Product Engineer',
+        'Cloud/API Engineer'
+      ];
+
+      function typeRoleText() {
+        if (!typingRoleText) {
+          return;
+        }
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          typingRoleText.textContent = roleTitles.join(' / ');
+          return;
+        }
+
+        let roleIndex = 0;
+        let letterIndex = 0;
+        let deleting = false;
+
+        const tick = () => {
+          const currentRole = roleTitles[roleIndex];
+          typingRoleText.textContent = currentRole.slice(0, letterIndex);
+
+          if (!deleting && letterIndex < currentRole.length) {
+            letterIndex += 1;
+            window.setTimeout(tick, 55);
+            return;
+          }
+
+          if (!deleting) {
+            deleting = true;
+            window.setTimeout(tick, 1200);
+            return;
+          }
+
+          if (letterIndex > 0) {
+            letterIndex -= 1;
+            window.setTimeout(tick, 28);
+            return;
+          }
+
+          deleting = false;
+          roleIndex = (roleIndex + 1) % roleTitles.length;
+          window.setTimeout(tick, 240);
+        };
+
+        tick();
+      }
+
+      typeRoleText();
 
       const modal = document.getElementById('projectModal');
       const closeModal = document.getElementById('closeModal');
