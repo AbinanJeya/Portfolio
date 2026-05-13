@@ -222,6 +222,92 @@
       selection-background-color: rgba(99,102,241,0.3);
     }
 
+    @media (pointer: fine) {
+      body.cursor-ready,
+      body.cursor-ready a,
+      body.cursor-ready button,
+      body.cursor-ready summary,
+      body.cursor-ready input,
+      body.cursor-ready textarea {
+        cursor: none;
+      }
+
+      #customCursor {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 9999;
+        pointer-events: none;
+        opacity: 0;
+        transform: translate3d(-100px, -100px, 0);
+        transition: opacity 180ms ease;
+      }
+
+      #customCursor.is-visible {
+        opacity: 1;
+      }
+
+      .cursor-ring,
+      .cursor-dot {
+        position: fixed;
+        left: 0;
+        top: 0;
+        border-radius: 9999px;
+        transform: translate3d(-50%, -50%, 0);
+        will-change: transform;
+      }
+
+      .cursor-ring {
+        width: 2.2rem;
+        height: 2.2rem;
+        border: 1px solid rgba(234, 88, 12, 0.62);
+        background: rgba(255, 247, 237, 0.18);
+        box-shadow: 0 0 0 1px rgba(253, 186, 116, 0.18), 0 12px 32px rgba(251, 146, 60, 0.18);
+        transition: width 180ms ease, height 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+      }
+
+      .cursor-dot {
+        width: 0.42rem;
+        height: 0.42rem;
+        background: #ea580c;
+        box-shadow: 0 0 18px rgba(234, 88, 12, 0.58);
+      }
+
+      #customCursor.is-interactive .cursor-ring {
+        width: 3.05rem;
+        height: 3.05rem;
+        border-color: rgba(225, 29, 72, 0.66);
+        background: rgba(255, 237, 213, 0.28);
+      }
+
+      #customCursor.is-pressed .cursor-ring {
+        width: 1.7rem;
+        height: 1.7rem;
+      }
+
+      .theme-dark .cursor-ring {
+        border-color: rgba(103, 232, 249, 0.62);
+        background: rgba(6, 182, 212, 0.12);
+        box-shadow: 0 0 0 1px rgba(165, 180, 252, 0.14), 0 14px 38px rgba(34, 211, 238, 0.18);
+      }
+
+      .theme-dark .cursor-dot {
+        background: #67e8f9;
+        box-shadow: 0 0 20px rgba(103, 232, 249, 0.72);
+      }
+
+      .theme-dark #customCursor.is-interactive .cursor-ring {
+        border-color: rgba(165, 180, 252, 0.76);
+        background: rgba(99, 102, 241, 0.2);
+      }
+    }
+
+    @media (pointer: coarse) {
+      #customCursor {
+        display: none;
+      }
+    }
+
     .theme-dark .light-glass {
       clip-path: none;
       border-radius: 9999px;
@@ -406,6 +492,11 @@
 </head>
 
 <body data-theme="light" class="portfolio-light theme-light antialiased text-gray-900 bg-white overflow-x-hidden min-h-screen font-[Geist] selection:bg-orange-100 selection:text-orange-900">
+
+  <div id="customCursor" aria-hidden="true">
+    <span class="cursor-ring"></span>
+    <span class="cursor-dot"></span>
+  </div>
 
   <div class="fixed inset-y-0 right-0 w-[120vw] md:w-[70vw] translate-x-[10%] md:translate-x-0 z-0 overflow-hidden pointer-events-none">
     <canvas id="webgl-canvas" class="absolute inset-0 w-full h-full"></canvas>
@@ -1373,6 +1464,44 @@
         themeToggle.addEventListener('click', () => {
           applyTheme(document.body.dataset.theme === 'dark' ? 'light' : 'dark');
         });
+      }
+
+      const customCursor = document.getElementById('customCursor');
+      const cursorRing = customCursor?.querySelector('.cursor-ring');
+      const cursorDot = customCursor?.querySelector('.cursor-dot');
+      const supportsCustomCursor = window.matchMedia('(pointer: fine)').matches && customCursor && cursorRing && cursorDot;
+
+      if (supportsCustomCursor) {
+        document.body.classList.add('cursor-ready');
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let ringX = mouseX;
+        let ringY = mouseY;
+
+        const moveCursor = () => {
+          ringX += (mouseX - ringX) * 0.22;
+          ringY += (mouseY - ringY) * 0.22;
+          cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+          cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+          window.requestAnimationFrame(moveCursor);
+        };
+
+        moveCursor();
+
+        document.addEventListener('mousemove', event => {
+          mouseX = event.clientX;
+          mouseY = event.clientY;
+          customCursor.classList.add('is-visible');
+
+          const target = event.target instanceof Element ? event.target : null;
+          customCursor.classList.toggle('is-interactive', Boolean(target?.closest('a, button, summary, input, textarea, label, [role="button"], .project-card')));
+        });
+
+        document.addEventListener('mousedown', () => customCursor.classList.add('is-pressed'));
+        document.addEventListener('mouseup', () => customCursor.classList.remove('is-pressed'));
+        document.addEventListener('mouseleave', () => customCursor.classList.remove('is-visible'));
+        document.addEventListener('mouseenter', () => customCursor.classList.add('is-visible'));
       }
 
       if (window.gsap) {
