@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+a<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
@@ -203,7 +203,20 @@
       --slice-shadow-4: -15px 0 30px -10px rgba(255,255,255,0.6);
       --slice-shadow-5: -15px 0 30px -10px rgba(255,255,255,0.3);
       --page-wash: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
-      transition: background-color 0.3s ease, color 0.3s ease;
+      transition: background-color 1s cubic-bezier(0.16, 1, 0.3, 1), color 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Ensure all elements transition during theme switch */
+    body.theme-transitioning,
+    body.theme-transitioning *,
+    body.theme-transitioning ::before,
+    body.theme-transitioning ::after {
+      transition: background-color 1s cubic-bezier(0.16, 1, 0.3, 1), 
+                  color 1s cubic-bezier(0.16, 1, 0.3, 1), 
+                  border-color 1s cubic-bezier(0.16, 1, 0.3, 1), 
+                  box-shadow 1s cubic-bezier(0.16, 1, 0.3, 1), 
+                  opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+                  backdrop-filter 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
 
     body.theme-dark {
@@ -1432,8 +1445,14 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       const themeToggle = document.getElementById('themeToggle');
-      const applyTheme = (theme) => {
+      const applyTheme = (theme, animate = false) => {
         const isDark = theme === 'dark';
+        
+        if (animate) {
+          document.body.classList.add('theme-transitioning');
+          setTimeout(() => document.body.classList.remove('theme-transitioning'), 1000);
+        }
+
         document.body.dataset.theme = theme;
         document.body.classList.toggle('theme-dark', isDark);
         document.body.classList.toggle('theme-light', !isDark);
@@ -1445,7 +1464,15 @@
         }
 
         if (window.portfolioShaderMaterial) {
-          window.portfolioShaderMaterial.uniforms.u_darkMode.value = isDark ? 1.0 : 0.0;
+          if (animate && window.gsap) {
+            gsap.to(window.portfolioShaderMaterial.uniforms.u_darkMode, {
+              value: isDark ? 1.0 : 0.0,
+              duration: 1.0,
+              ease: 'power2.inOut'
+            });
+          } else {
+            window.portfolioShaderMaterial.uniforms.u_darkMode.value = isDark ? 1.0 : 0.0;
+          }
         }
 
         try {
@@ -1462,11 +1489,11 @@
         savedTheme = 'light';
       }
 
-      applyTheme(savedTheme === 'dark' ? 'dark' : 'light');
+      applyTheme(savedTheme === 'dark' ? 'dark' : 'light', false);
 
       if (themeToggle) {
         themeToggle.addEventListener('click', () => {
-          applyTheme(document.body.dataset.theme === 'dark' ? 'light' : 'dark');
+          applyTheme(document.body.dataset.theme === 'dark' ? 'light' : 'dark', true);
         });
       }
 
