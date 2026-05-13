@@ -158,6 +158,15 @@
       z-index: 5;
     }
 
+    .case-proof-card {
+      clip-path: none;
+      border-radius: 1rem;
+      min-height: 8.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
     .portfolio-light .preview-shell {
       border-color: rgba(25,28,33,0.08) !important;
       background: rgba(255,255,255,0.7);
@@ -204,6 +213,12 @@
       border-color: rgba(99,102,241,0.3) !important;
       background: rgba(3,7,18,0.42) !important;
       color: #a5b4fc !important;
+    }
+
+    .portfolio-light .case-proof-card,
+    .theme-dark .case-proof-card {
+      clip-path: none;
+      border-radius: 1rem !important;
     }
 
     .theme-dark .light-card {
@@ -402,6 +417,7 @@
         <a href="#skills" class="hover:text-gray-900 transition-colors">Skills</a>
         <a href="#experience" class="hover:text-gray-900 transition-colors">Experience</a>
         <a href="#projects" class="hover:text-gray-900 transition-colors">Projects</a>
+        <a href="#refer" class="hover:text-gray-900 transition-colors">Refer me</a>
         <a href="#contact" class="hover:text-gray-900 transition-colors">Contact</a>
         <a href="assets/AbinanJeyachandranResume.pdf" target="_blank" rel="noopener noreferrer" class="hover:text-gray-900 transition-colors">Resume</a>
       </nav>
@@ -441,35 +457,6 @@
         <p class="anim-element mt-7 text-base md:text-lg text-gray-600 leading-relaxed max-w-[34rem]" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.3s;">
           Hi, I’m Abinan Jeyachandran. I specialize in software development, system optimization, AI integration, secure applications, automation, and full-stack engineering.
         </p>
-
-        <div class="anim-element mt-8 light-glass neu-cut-md border backdrop-blur-md p-4 md:p-5 neu-shadow" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.35s;">
-          <p class="section-label text-[0.68rem] font-semibold tracking-[0.22em] uppercase font-[JetBrains_Mono]">Recruiter Snapshot</p>
-          <div class="mt-4 grid grid-cols-2 sm:grid-cols-5 gap-3">
-            <div>
-              <p class="text-xl md:text-2xl font-light text-white">2+ yrs</p>
-              <p class="mt-1 text-xs leading-snug text-zinc-400">production experience</p>
-            </div>
-            <div>
-              <p class="text-xl md:text-2xl font-light text-white">Full-stack</p>
-              <p class="mt-1 text-xs leading-snug text-zinc-400">React, APIs, databases</p>
-            </div>
-            <div>
-              <p class="text-xl md:text-2xl font-light text-white">AI + Auto</p>
-              <p class="mt-1 text-xs leading-snug text-zinc-400">intelligent workflows</p>
-            </div>
-            <div>
-              <p class="text-xl md:text-2xl font-light text-white">Secure APIs</p>
-              <p class="mt-1 text-xs leading-snug text-zinc-400">RBAC, auth, compliance</p>
-            </div>
-            <div>
-              <p class="text-xl md:text-2xl font-light text-white">Live demos</p>
-              <p class="mt-1 text-xs leading-snug text-zinc-400">shipped product proof</p>
-            </div>
-          </div>
-          <p class="mt-4 border-t border-orange-100 pt-3 text-xs md:text-sm leading-relaxed text-zinc-400">
-            Currently focused on full-stack product engineering, AI integrations, backend automation, and secure systems.
-          </p>
-        </div>
 
         <div class="anim-element mt-10 flex flex-wrap items-center gap-4" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.4s;">
           <a href="#projects" class="primary-action inline-flex items-center justify-center gap-2 neu-cut-md bg-[#1c1c1e] px-7 py-3.5 text-sm font-normal text-white text-on-dark hover:bg-black transition-all duration-300 neu-shadow hover:-translate-y-0.5">
@@ -864,17 +851,17 @@
               </div>
 
               <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div class="light-glass neu-cut-sm border p-3">
+                <div class="case-proof-card light-glass border p-4">
                   <p class="text-[0.68rem] font-[JetBrains_Mono] uppercase tracking-[0.18em] text-zinc-500">Problem</p>
-                  <p class="mt-2 text-sm leading-relaxed text-zinc-400">Fitness apps often split workouts, nutrition, and health signals.</p>
+                  <p class="mt-3 text-sm leading-relaxed text-zinc-400">Fitness apps often split workouts, nutrition, and health signals.</p>
                 </div>
-                <div class="light-glass neu-cut-sm border p-3">
+                <div class="case-proof-card light-glass border p-4">
                   <p class="text-[0.68rem] font-[JetBrains_Mono] uppercase tracking-[0.18em] text-zinc-500">Solution</p>
-                  <p class="mt-2 text-sm leading-relaxed text-zinc-400">Unified React Native coaching with Health Connect and Firebase.</p>
+                  <p class="mt-3 text-sm leading-relaxed text-zinc-400">Unified React Native coaching with Health Connect and Firebase.</p>
                 </div>
-                <div class="light-glass neu-cut-sm border p-3">
+                <div class="case-proof-card light-glass border p-4">
                   <p class="text-[0.68rem] font-[JetBrains_Mono] uppercase tracking-[0.18em] text-zinc-500">Impact</p>
-                  <p class="mt-2 text-sm leading-relaxed text-zinc-400">Recruiters can try the product flow without leaving the page.</p>
+                  <p class="mt-3 text-sm leading-relaxed text-zinc-400">Recruiters can try the product flow without leaving the page.</p>
                 </div>
               </div>
 
@@ -1071,6 +1058,74 @@
           </div>
         </button>
       </div>
+    </section>
+
+    <section id="refer" class="py-10 md:py-16 border-t border-orange-100">
+      <div class="anim-element flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+        <div>
+          <p class="section-label text-xs font-semibold tracking-[0.22em] uppercase font-[JetBrains_Mono]">Refer me</p>
+          <h2 class="mt-3 text-3xl md:text-5xl font-light tracking-tight text-white">Everything needed for a referral.</h2>
+        </div>
+        <p class="text-sm md:text-base text-zinc-400 leading-relaxed max-w-xl">
+          Quick-copy contact details plus a downloadable resume for internal referral forms and recruiter notes.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-4">
+        <article class="anim-element light-card neu-cut-md border backdrop-blur-md p-6 md:p-7 transition-all duration-300 hover:-translate-y-1" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+          <div class="flex items-start justify-between gap-5">
+            <div class="h-11 w-11 rounded-full icon-well flex items-center justify-center">
+              <iconify-icon icon="solar:document-add-linear" class="text-xl" stroke-width="1.5"></iconify-icon>
+            </div>
+            <span class="text-xs text-zinc-500 font-[JetBrains_Mono]">PDF</span>
+          </div>
+          <h3 class="mt-7 text-xl font-medium tracking-tight text-white">Resume packet</h3>
+          <p class="mt-3 text-sm leading-relaxed text-zinc-400">
+            Download the current resume and copy the referral details in one click.
+          </p>
+          <div class="mt-7 flex flex-wrap gap-3">
+            <a href="assets/AbinanJeyachandranResume.pdf" download class="primary-action inline-flex items-center justify-center gap-2 neu-cut-md bg-[#1c1c1e] px-5 py-2.5 text-sm font-normal text-white text-on-dark hover:bg-black transition-all neu-shadow">
+              Download resume
+              <iconify-icon icon="solar:download-minimalistic-linear" class="text-base" stroke-width="1.5"></iconify-icon>
+            </a>
+            <button type="button" class="copy-referral-button secondary-action inline-flex items-center justify-center gap-2 neu-cut-md light-glass neu-shadow px-5 py-2.5 text-sm font-normal text-orange-600 hover:text-orange-700 transition-all" data-copy-value="Full name: Abinan Jeyachandran&#10;Email: abinan.jeyachandran@gmail.com&#10;Phone: 647-803-9461&#10;LinkedIn: https://www.linkedin.com/in/abinan-jeyachandran-abb528183/">
+              Copy all
+              <iconify-icon icon="solar:copy-linear" class="text-base" stroke-width="1.5"></iconify-icon>
+            </button>
+          </div>
+        </article>
+
+        <div class="anim-element grid grid-cols-1 sm:grid-cols-3 gap-4" style="opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+          <article class="light-card neu-cut-md border backdrop-blur-md p-5">
+            <p class="text-xs font-[JetBrains_Mono] uppercase tracking-[0.2em] text-zinc-500">Full name</p>
+            <p class="mt-3 text-base font-medium text-white">Abinan Jeyachandran</p>
+            <button type="button" class="copy-referral-button mt-5 inline-flex items-center justify-center gap-2 neu-cut-md light-glass neu-shadow px-4 py-2 text-xs font-normal text-orange-600 hover:text-orange-700 transition-all" data-copy-value="Abinan Jeyachandran">
+              Copy
+              <iconify-icon icon="solar:copy-linear" class="text-sm" stroke-width="1.5"></iconify-icon>
+            </button>
+          </article>
+
+          <article class="light-card neu-cut-md border backdrop-blur-md p-5">
+            <p class="text-xs font-[JetBrains_Mono] uppercase tracking-[0.2em] text-zinc-500">Email address</p>
+            <p class="mt-3 text-sm font-medium text-white break-words">abinan.jeyachandran@gmail.com</p>
+            <button type="button" class="copy-referral-button mt-5 inline-flex items-center justify-center gap-2 neu-cut-md light-glass neu-shadow px-4 py-2 text-xs font-normal text-orange-600 hover:text-orange-700 transition-all" data-copy-value="abinan.jeyachandran@gmail.com">
+              Copy
+              <iconify-icon icon="solar:copy-linear" class="text-sm" stroke-width="1.5"></iconify-icon>
+            </button>
+          </article>
+
+          <article class="light-card neu-cut-md border backdrop-blur-md p-5">
+            <p class="text-xs font-[JetBrains_Mono] uppercase tracking-[0.2em] text-zinc-500">Phone number</p>
+            <p class="mt-3 text-base font-medium text-white">647-803-9461</p>
+            <button type="button" class="copy-referral-button mt-5 inline-flex items-center justify-center gap-2 neu-cut-md light-glass neu-shadow px-4 py-2 text-xs font-normal text-orange-600 hover:text-orange-700 transition-all" data-copy-value="647-803-9461">
+              Copy
+              <iconify-icon icon="solar:copy-linear" class="text-sm" stroke-width="1.5"></iconify-icon>
+            </button>
+          </article>
+        </div>
+      </div>
+
+      <p id="copyReferralStatus" class="mt-4 text-xs text-zinc-500" aria-live="polite"></p>
     </section>
 
     <section id="contact" class="py-10 md:py-16 border-t border-orange-100">
@@ -1519,6 +1574,52 @@
 
       document.querySelectorAll('.card-live-preview').forEach(preview => {
         preview.addEventListener('click', event => event.stopPropagation());
+      });
+
+      const copyReferralButtons = document.querySelectorAll('.copy-referral-button');
+      const copyReferralStatus = document.getElementById('copyReferralStatus');
+
+      function copyReferralText(value) {
+        if (navigator.clipboard && window.isSecureContext) {
+          return navigator.clipboard.writeText(value);
+        }
+
+        const textarea = document.createElement('textarea');
+        textarea.value = value;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        textarea.remove();
+        return Promise.resolve();
+      }
+
+      copyReferralButtons.forEach(button => {
+        button.addEventListener('click', async () => {
+          const originalText = button.textContent.trim();
+          const copiedText = originalText === 'Copy all' ? 'Copied all' : 'Copied';
+
+          try {
+            await copyReferralText(button.dataset.copyValue || '');
+            button.firstChild.textContent = copiedText + ' ';
+            if (copyReferralStatus) {
+              copyReferralStatus.textContent = 'Referral info copied to clipboard.';
+            }
+
+            window.setTimeout(() => {
+              button.firstChild.textContent = originalText + ' ';
+              if (copyReferralStatus) {
+                copyReferralStatus.textContent = '';
+              }
+            }, 1800);
+          } catch (error) {
+            if (copyReferralStatus) {
+              copyReferralStatus.textContent = 'Copy failed. You can still select the text manually.';
+            }
+          }
+        });
       });
 
       closeModal.addEventListener('click', closeProject);
