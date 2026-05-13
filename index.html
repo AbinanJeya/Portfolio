@@ -232,6 +232,11 @@
         cursor: none;
       }
 
+      body.cursor-ready .native-cursor-zone,
+      body.cursor-ready .native-cursor-zone * {
+        cursor: auto !important;
+      }
+
       #customCursor {
         position: fixed;
         left: 0;
@@ -493,7 +498,7 @@
 
 <body data-theme="light" class="portfolio-light theme-light antialiased text-gray-900 bg-white overflow-x-hidden min-h-screen font-[Geist] selection:bg-orange-100 selection:text-orange-900">
 
-  <div id="customCursor" aria-hidden="true">
+  <div id="customCursor" aria-hidden="true" style="pointer-events: none;">
     <span class="cursor-ring"></span>
     <span class="cursor-dot"></span>
   </div>
@@ -970,8 +975,8 @@
               </div>
             </div>
 
-            <div class="card-live-preview">
-              <div class="preview-shell mx-auto w-full max-w-[22rem] overflow-hidden rounded-[2rem] border p-2 shadow-2xl">
+            <div class="card-live-preview native-cursor-zone">
+              <div class="preview-shell native-cursor-zone mx-auto w-full max-w-[22rem] overflow-hidden rounded-[2rem] border p-2 shadow-2xl">
                 <iframe title="AbWork live app preview" src="abwork-preview/index.html" class="h-full w-full rounded-[1.55rem] border-0 bg-black" loading="lazy" allow="fullscreen"></iframe>
               </div>
             </div>
@@ -1312,7 +1317,7 @@
             Live app preview
             <iconify-icon icon="solar:alt-arrow-down-linear" class="text-base" stroke-width="1.5"></iconify-icon>
           </summary>
-          <div class="preview-shell mx-auto mt-4 w-full max-w-[23rem] overflow-hidden rounded-[2rem] border p-2 shadow-2xl">
+          <div class="preview-shell native-cursor-zone mx-auto mt-4 w-full max-w-[23rem] overflow-hidden rounded-[2rem] border p-2 shadow-2xl">
             <iframe id="modalPreviewFrame" title="AbWork live app preview" class="h-full w-full rounded-[1.55rem] border-0 bg-black" loading="lazy" allow="fullscreen"></iframe>
           </div>
         </details>
@@ -1502,6 +1507,12 @@
         document.addEventListener('mouseup', () => customCursor.classList.remove('is-pressed'));
         document.addEventListener('mouseleave', () => customCursor.classList.remove('is-visible'));
         document.addEventListener('mouseenter', () => customCursor.classList.add('is-visible'));
+
+        document.querySelectorAll('.native-cursor-zone, iframe').forEach(zone => {
+          zone.addEventListener('mouseenter', () => {
+            customCursor.classList.remove('is-visible', 'is-interactive', 'is-pressed');
+          });
+        });
       }
 
       if (window.gsap) {
