@@ -244,7 +244,6 @@
         z-index: 9999;
         pointer-events: none;
         opacity: 0;
-        transform: translate3d(-100px, -100px, 0);
         transition: opacity 180ms ease;
       }
 
@@ -1481,22 +1480,17 @@
 
         let mouseX = window.innerWidth / 2;
         let mouseY = window.innerHeight / 2;
-        let ringX = mouseX;
-        let ringY = mouseY;
-
-        const moveCursor = () => {
-          ringX += (mouseX - ringX) * 0.22;
-          ringY += (mouseY - ringY) * 0.22;
-          cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+        const renderCursor = () => {
+          cursorRing.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
           cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
-          window.requestAnimationFrame(moveCursor);
         };
 
-        moveCursor();
+        renderCursor();
 
         document.addEventListener('mousemove', event => {
           mouseX = event.clientX;
           mouseY = event.clientY;
+          renderCursor();
           customCursor.classList.add('is-visible');
 
           const target = event.target instanceof Element ? event.target : null;
